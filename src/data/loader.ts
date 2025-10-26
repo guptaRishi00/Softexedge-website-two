@@ -55,6 +55,37 @@ const homepageQuery = () =>
               },
             },
           },
+          "shared-components.brands": {
+            populate: {
+              image: {
+                fields: ["url", "name"],
+              },
+            },
+          },
+          "homepage.what-we-do": {
+            populate: {
+              cards: {
+                populate: {
+                  image: {
+                    fields: ["url", "name"],
+                  },
+                  button: true,
+                },
+              },
+            },
+          },
+          "homepage.our-project": {
+            populate: {
+              card: {
+                populate: {
+                  image: {
+                    fields: ["url", "name"],
+                  },
+                  button: true,
+                },
+              },
+            },
+          },
         },
       },
     },
