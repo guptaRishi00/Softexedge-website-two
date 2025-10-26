@@ -35,7 +35,7 @@ export default function Project({ data }: any) {
         {data?.card?.map((card: any) => (
           <div className="flex flex-col items-center gap-3" key={card.id}>
             <div className="w-[640px] h-[500px] border border-[#2A2A2A] rounded-3xl overflow-hidden">
-              <video width="700" controls>
+              <video width="700" autoPlay loop muted playsInline controls>
                 <source src={card.image.url} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
