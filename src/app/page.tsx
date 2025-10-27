@@ -1,5 +1,6 @@
 import Brands from "@/components/homepage/Brands";
 import HeroSection from "@/components/homepage/HeroSection";
+import OurCase from "@/components/homepage/OurCase";
 import Project from "@/components/homepage/Project";
 import WhatWeDo from "@/components/homepage/WhatWeDo";
 
@@ -23,7 +24,9 @@ export default async function Home() {
     (block: any) => block.__component === "homepage.our-project"
   );
 
-  console.log(projects);
+  const ourCase = response.data.blocks.find(
+    (block: any) => block.__component === "homepage.our-case"
+  );
 
   return (
     <div className="p-3 space-y-10">
@@ -31,6 +34,7 @@ export default async function Home() {
       <Brands data={brands} />
       <WhatWeDo data={whatWeDo} />
       <Project data={projects} />
+      <OurCase data={ourCase} />
     </div>
   );
 }

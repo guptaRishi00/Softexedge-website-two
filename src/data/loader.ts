@@ -86,6 +86,26 @@ const homepageQuery = () =>
               },
             },
           },
+          "homepage.our-case": {
+            populate: {
+              tabs: true,
+              cards: {
+                populate: {
+                  button: true,
+                  image: {
+                    fields: ["url", "name"],
+                  },
+                  challenge: true,
+                  solution: true,
+                  result: {
+                    populate: {
+                      lists: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       },
     },
