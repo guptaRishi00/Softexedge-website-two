@@ -1,5 +1,5 @@
 import { getPageData } from "@/data/loader";
-import HeroSection from "@/components/shared/HeroSection";
+import HeroSection from "@/components/aboutpage/HeroSectionAbout";
 import OurStory from "@/components/aboutpage/OurStory";
 import OurMission from "@/components/aboutpage/OurMission";
 import WhyChoose from "@/components/aboutpage/WhyChoose";
