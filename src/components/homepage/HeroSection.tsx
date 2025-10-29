@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../layout/Header";
 import Image from "next/image";
 import Button from "../Button";
-import Link from "next/link";
+
 import LinkComp from "../LinkComp";
 
 export default function HeroSection({ data }: any) {

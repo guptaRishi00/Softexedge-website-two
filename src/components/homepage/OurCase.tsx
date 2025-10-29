@@ -5,15 +5,14 @@ import Image from "next/image";
 
 export default function OurCase({ data }: any) {
   const [activeTab, setActiveTab] = useState(0);
-  // NEW state for the mobile slider
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // This logic is now for the DESKTOP view
   const cards = data?.cards[activeTab];
   const theme = cards?.button.theme;
 
   return (
-    <div className="h-auto bg-black rounded-3xl lg:grid lg:grid-cols-2 py-10 lg:gap-16 lg:py-10 lg:px-20 overflow-hidden">
+    <div className="h-auto bg-black rounded-3xl lg:grid lg:grid-cols-2 py-10 lg:gap-16 lg:py-10 lg:px-12 overflow-hidden">
       <div className="flex flex-col items-start justify-between h-full">
         <div className="flex flex-col items-center lg:items-start justify-center gap-8 px-5 lg:px-0">
           <p className="bg-white/10 text-white py-2 px-4 rounded-full">
@@ -52,19 +51,20 @@ export default function OurCase({ data }: any) {
         </div>
       </div>
 
-      {/* MODIFIED: This card view is now HIDDEN on mobile and only visible on desktop */}
       <div className="bg-[#121212] rounded-2xl px-5 py-8 hidden lg:flex flex-col gap-8">
         <div className="flex items-center justify-between">
           <h1 className="text-white text-2xl font-medium">{cards.title}</h1>
-          <Button color={theme}>{cards?.button.text}</Button>
+          <Button color={theme} className="px-5">
+            {cards?.button.text}
+          </Button>
         </div>
-        <div className="w-full lg:h-[330px] p-2 overflow-hidden ">
+        <div className="w-full lg:h-[330px] p-2 overflow-hidden rounded-sm">
           <Image
             src={cards?.image?.url}
             width={300}
             height={300}
             alt="card image"
-            className="w-full object-cover object-center mx-auto"
+            className="w-full object-cover object-center mx-auto rounded-sm"
           />
         </div>
 
@@ -92,24 +92,21 @@ export default function OurCase({ data }: any) {
         </div>
       </div>
 
-      {/* NEW: Mobile-only carousel */}
       <div className="lg:hidden w-full mt-10">
         <div className="overflow-hidden">
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(${-100 * currentIndex}%)` }}
           >
-            {/* Loop over ALL cards for the slider */}
             {data?.cards?.map((card: any, index: number) => (
               <div className="w-full shrink-0 grow-0 px-5" key={index}>
-                {/* Re-using the same card structure from above */}
                 <div className="bg-[#121212] rounded-2xl px-5 py-8 flex flex-col gap-8">
                   <div className="flex items-center justify-between">
-                    <h1 className="text-white text-2xl font-medium">
+                    <h1 className="text-white lg:text-2xl font-medium">
                       {card.title}
                     </h1>
-                    {/* Note: using card.button.theme directly */}
-                    <Button color={card?.button.theme}>
+
+                    <Button color={card?.button.theme} className="text-xs px-5">
                       {card?.button.text}
                     </Button>
                   </div>
@@ -152,15 +149,17 @@ export default function OurCase({ data }: any) {
           </div>
         </div>
 
-        {/* NEW: Pagination dots */}
-        <div className="flex items-center justify-center gap-2 mt-6">
-          {data?.cards?.map((_: any, index: number) => (
+        <div className="flex lg:hidden justify-center items-center gap-3 pt-4">
+          {data?.cards?.map((_: any, index: any) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                currentIndex === index ? "bg-white" : "bg-white/30"
+              className={`h-1 w-1 rounded-full border border-white transition-colors ${
+                index === currentIndex
+                  ? "bg-white"
+                  : "bg-transparent hover:bg-white/50"
               }`}
+              aria-label={`View Project ${index + 1}`}
             />
           ))}
         </div>

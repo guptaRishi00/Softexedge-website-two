@@ -106,6 +106,43 @@ const homepageQuery = () =>
               },
             },
           },
+          "homepage.why-choose": {
+            populate: {
+              textBlock: true,
+              image: {
+                fields: ["url", "name"],
+              },
+            },
+          },
+          "homepage.contact": {
+            populate: {
+              cards: {
+                populate: {
+                  profile: {
+                    fields: ["url", "name"],
+                  },
+                },
+              },
+              leftCard: {
+                populate: {
+                  image: {
+                    fields: ["url", "name"],
+                  },
+                },
+              },
+            },
+          },
+          "homepage.about": {
+            populate: {
+              carousel: {
+                populate: {
+                  image: {
+                    fields: ["url", "name"],
+                  },
+                },
+              },
+            },
+          },
         },
       },
     },
