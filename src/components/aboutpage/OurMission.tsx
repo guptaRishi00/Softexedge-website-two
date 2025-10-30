@@ -58,12 +58,12 @@ export default function OurMission({ data }: OurMissionProps) {
             >
               {/* Card Image */}
               {imageUrl ? (
-                <div className="bg-[#1E1E1E] rounded-xl p-4 w-16 h-16 flex items-center justify-center">
+                <div className="flex items-center justify-center">
                   <Image
                     src={imageUrl}
                     alt={card.tag || "Mission Icon"}
-                    width={40}
-                    height={40}
+                    width={60}
+                    height={60}
                     className="object-contain"
                   />
                 </div>

@@ -9,17 +9,17 @@ interface Media {
   alternativeText?: string;
 }
 
-interface Point {
+interface List {
   id?: number;
   text?: string;
-  icon?: { data?: { attributes: Media } } | Media;
+  icon?: { url?: string; name?: string };
 }
 
 interface WhyChooseData {
   tag?: string;
   title?: string;
-  image?: { data?: { attributes: Media } } | Media;
-  points?: Point[];
+  image?: { url?: string; name?: string };
+  lists?: List[];
   button?: {
     text?: string;
     link?: string;
@@ -30,17 +30,19 @@ interface WhyChooseProps {
   data?: WhyChooseData;
 }
 
-export default function WhyChoose({ data }: WhyChooseProps) {
+export default function WhyChoose({ data }: any) {
   const imageUrl =
-    (data?.image as any)?.data?.attributes?.url ||
-    (data?.image as any)?.url ||
-    "";
+    data?.image?.url?.startsWith("http")
+      ? data?.image?.url
+      : data?.image?.url
+      ? `${process.env.NEXT_PUBLIC_STRAPI_URL || "https://giving-feast-dfcaa21f17.media.strapiapp.com"}${data.image.url}`
+      : "";
 
   return (
-    <section className="w-full bg-black text-white rounded-3xl overflow-hidden flex flex-col lg:flex-row items-stretch my-10">
+    <section className="lg:grid min-h-screen lg:grid-cols-2 items-center gap-10 bg-black px-5 text-white rounded-3xl my-10">
       {/* Left: Image */}
       {imageUrl && (
-        <div className="w-full lg:w-1/2 relative h-[300px] lg:h-auto">
+        <div className="w-full relative h-[300px] lg:h-full">
           <Image
             src={imageUrl}
             alt={data?.title || "Why Choose Us"}
@@ -50,8 +52,8 @@ export default function WhyChoose({ data }: WhyChooseProps) {
         </div>
       )}
 
-      {/* Right: Text Content */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center p-10 lg:p-16 bg-gradient-to-b from-[#0A0A0A] to-[#000000]">
+      {/* Right: Content */}
+      <div className="w-full flex flex-col justify-center p-10 lg:p-16 bg-gradient-to-b from-[#0A0A0A] to-[#000000]">
         {/* Tag */}
         {data?.tag && (
           <span className="bg-white/10 text-white text-xs sm:text-sm px-4 py-2 rounded-full w-fit mb-6">
@@ -66,28 +68,28 @@ export default function WhyChoose({ data }: WhyChooseProps) {
           </h2>
         )}
 
-        {/* Points */}
+        {/* Lists */}
         <ul className="flex flex-col gap-4 mb-8">
-          {data?.points?.map((point, index) => {
-            const iconUrl =
-              (point.icon as any)?.data?.attributes?.url ||
-              (point.icon as any)?.url ||
-              "/icons/check.svg"; // fallback icon
+          {data?.lists?.map((list:any, index:any) => {
+            
 
             return (
               <li
-                key={point.id || index}
+                key={list.id || index}
                 className="flex items-start gap-3 text-gray-300"
               >
-                <Image
-                  src={iconUrl}
-                  alt="icon"
+                {list?.icon?.map((icon: any) => (
+                  <Image
+                  key={icon.id}
+                  src={icon?.url}
+                  alt={list.icon?.name || "icon"}
                   width={20}
                   height={20}
                   className="mt-1"
                 />
+                ))}
                 <span className="text-sm sm:text-base leading-relaxed">
-                  {point.text}
+                  {list.text}
                 </span>
               </li>
             );
