@@ -6,9 +6,7 @@ const globalQuery = qs.stringify({
   populate: {
     header: {
       populate: {
-        logo: {
-          fields: ["url", "name"],
-        },
+        logo: { fields: ["url", "name"] },
         links: true,
         cta: true,
       },
@@ -32,43 +30,31 @@ const homepageQuery = () =>
         on: {
           "shared-components.hero-section": {
             populate: {
-              image: {
-                fields: ["url", "name"],
-              },
-              titleImage: {
-                fields: ["url", "name"],
-              },
+              image: { fields: ["url", "name"] },
+              titleImage: { fields: ["url", "name"] },
               letsTalk: {
                 populate: {
-                  images: {
-                    fields: ["url", "name"],
-                  },
+                  images: { fields: ["url", "name"] },
                 },
               },
               viewOurWork: true,
               bookCall: {
                 populate: {
-                  logo: {
-                    fields: ["url", "name"],
-                  },
+                  logo: { fields: ["url", "name"] },
                 },
               },
             },
           },
           "shared-components.brands": {
             populate: {
-              image: {
-                fields: ["url", "name"],
-              },
+              image: { fields: ["url", "name"] },
             },
           },
           "homepage.what-we-do": {
             populate: {
               cards: {
                 populate: {
-                  image: {
-                    fields: ["url", "name"],
-                  },
+                  image: { fields: ["url", "name"] },
                   button: true,
                 },
               },
@@ -78,9 +64,7 @@ const homepageQuery = () =>
             populate: {
               card: {
                 populate: {
-                  image: {
-                    fields: ["url", "name"],
-                  },
+                  image: { fields: ["url", "name"] },
                   button: true,
                 },
               },
@@ -92,15 +76,11 @@ const homepageQuery = () =>
               cards: {
                 populate: {
                   button: true,
-                  image: {
-                    fields: ["url", "name"],
-                  },
+                  image: { fields: ["url", "name"] },
                   challenge: true,
                   solution: true,
                   result: {
-                    populate: {
-                      lists: true,
-                    },
+                    populate: { lists: true },
                   },
                 },
               },
@@ -109,25 +89,19 @@ const homepageQuery = () =>
           "homepage.why-choose": {
             populate: {
               textBlock: true,
-              image: {
-                fields: ["url", "name"],
-              },
+              image: { fields: ["url", "name"] },
             },
           },
           "homepage.contact": {
             populate: {
               cards: {
                 populate: {
-                  profile: {
-                    fields: ["url", "name"],
-                  },
+                  profile: { fields: ["url", "name"] },
                 },
               },
               leftCard: {
                 populate: {
-                  image: {
-                    fields: ["url", "name"],
-                  },
+                  image: { fields: ["url", "name"] },
                 },
               },
             },
@@ -136,9 +110,7 @@ const homepageQuery = () =>
             populate: {
               carousel: {
                 populate: {
-                  image: {
-                    fields: ["url", "name"],
-                  },
+                  image: { fields: ["url", "name"] },
                 },
               },
             },
@@ -157,107 +129,101 @@ export async function getHomepageData() {
   return await fetchAPI(url.href, { method: "GET" });
 }
 
+// ✅ PAGE QUERY (ABOUT + SERVICES)
 const pageQuery = (slug: string) =>
-  qs.stringify({
-    filters: {
-      slug: {
-        $eq: slug,
+  qs.stringify(
+    {
+      filters: {
+        slug: { $eq: slug },
       },
-    },
-    populate: {
-      blocks: {
-        on: {
-          "shared-components.hero-section": {
-            populate: {
-              image: { fields: ["url", "name"] },
-
-              letsTalk: {
-                populate: {
-                  images: { fields: ["url", "name"] },
-                },
-              },
-              viewOurWork: true,
-            },
-          },
-          "aboutpage.our-story": {
-            populate: {
-              tag: true,
-              title: true,
-              description: true,
-              button: true,
-            },
-          },
-
-          "aboutpage.our-mission": {
-            populate: {
-              cards: {
-                populate: {
-                  image: { fields: ["url", "name"] },
-                },
-              },
-            },
-          },
-          "homepage.what-we-do": {
-            populate: {
-              cards: {
-                populate: {
-                  image: {
-                    fields: ["url", "name"],
+      populate: {
+        blocks: {
+          on: {
+            // ABOUT PAGE BLOCKS
+            "page.about": {
+              populate: {
+                herosection: {
+                  populate: {
+                    image: { fields: ["url", "name"] },
+                    letsTalk: {
+                      populate: { images: { fields: ["url", "name"] } },
+                    },
+                    viewOurWork: true,
                   },
-                  button: true,
                 },
-              },
-            },
-          },
-
-          "aboutpage.why-choose": {
-            populate: {
-              image: { fields: ["url", "name"] },
-              lists: {
-                populate: {
-                  icon: { fields: ["url", "name"] },
+                ourStory: {
+                  populate: {
+                    button: true,
+                  },
                 },
-              },
-              button: true,
-            },
-          },
-
-          // ✅ Our Team section
-          "aboutpage.our-team": {
-            populate: {
-              images: { fields: ["url", "name"] },
-              button: true,
-            },
-          },
-
-          // ✅ Review/Testimonials section
-          "aboutpage.review": {
-            populate: {
-              cards: {
-                populate: {
-                  icon: { fields: ["url", "name"] },
-                  image: { fields: ["url", "name"] },
+                ourMission: {
+                  populate: {
+                    cards: {
+                      populate: {
+                        image: { fields: ["url", "name"] },
+                        button: true,
+                      },
+                    },
+                  },
                 },
-              },
-              "shared-components.brands": {
-                populate: {
-                  image: {
-                    fields: ["url", "name"],
+                whatWeDo: {
+                  populate: {
+                    cards: {
+                      populate: {
+                        image: { fields: ["url", "name"] },
+                        button: true,
+                      },
+                    },
+                  },
+                },
+                whyChoose: {
+                  populate: {
+                    image: { fields: ["url", "name"] },
+                    lists: {
+                      populate: {
+                        icon: { fields: ["url", "name"] },
+                      },
+                    },
+                    button: true,
+                  },
+                },
+                ourTeam: {
+                  populate: {
+                    images: { fields: ["url", "name"] },
+                    button: true,
+                  },
+                },
+                review: {
+                  populate: {
+                    cards: {
+                      populate: {
+                        icon: { fields: ["url", "name"] },
+                        profile: { fields: ["url", "name"] },
+                      },
+                    },
+                    brands: {
+                      populate: {
+                        image: { fields: ["url", "name"] },
+                      },
+                    },
                   },
                 },
               },
             },
+
+            
           },
         },
       },
     },
-  });
+    { encodeValuesOnly: true }
+  );
 
 export async function getPageData(slug: string) {
-  const path = `/api/pages`;
   const BASE_URL = getStrapiURL();
-  const url = new URL(path, BASE_URL);
+  const query = pageQuery(slug);
+  const url = `${BASE_URL}/api/pages?${query}`;
 
-  url.search = pageQuery(slug);
-  return await fetchAPI(url.href, { method: "GET" });
+  const response = await fetchAPI(url, { method: "GET" });
+  return response;
 }
