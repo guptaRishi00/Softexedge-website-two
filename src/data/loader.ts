@@ -210,8 +210,12 @@ const pageQuery = (slug: string) =>
                 },
               },
             },
+           "page.service": {
+              populate: {
+                herosection: true,
 
-            
+              },
+            },
           },
         },
       },

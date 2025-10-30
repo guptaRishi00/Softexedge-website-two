@@ -30,7 +30,7 @@ interface WhyChooseProps {
   data?: WhyChooseData;
 }
 
-export default function WhyChoose({ data }: WhyChooseProps) {
+export default function WhyChoose({ data }: any) {
   const imageUrl =
     data?.image?.url?.startsWith("http")
       ? data?.image?.url
@@ -42,7 +42,7 @@ export default function WhyChoose({ data }: WhyChooseProps) {
     <section className="lg:grid min-h-screen lg:grid-cols-2 items-center gap-10 bg-black px-5 text-white rounded-3xl my-10">
       {/* Left: Image */}
       {imageUrl && (
-        <div className="w-full relative h-[300px] lg:h-[100%]">
+        <div className="w-full relative h-[300px] lg:h-full">
           <Image
             src={imageUrl}
             alt={data?.title || "Why Choose Us"}
@@ -70,26 +70,24 @@ export default function WhyChoose({ data }: WhyChooseProps) {
 
         {/* Lists */}
         <ul className="flex flex-col gap-4 mb-8">
-          {data?.lists?.map((list, index) => {
-            const iconUrl =
-              list?.icon?.url?.startsWith("http")
-                ? list.icon.url
-                : list?.icon?.url
-                ? `${process.env.NEXT_PUBLIC_STRAPI_URL || "https://giving-feast-dfcaa21f17.media.strapiapp.com"}${list.icon.url}`
-                : "/icons/check.svg"; // fallback
+          {data?.lists?.map((list:any, index:any) => {
+            
 
             return (
               <li
                 key={list.id || index}
                 className="flex items-start gap-3 text-gray-300"
               >
-                <Image
-                  src={iconUrl}
+                {list?.icon?.map((icon: any) => (
+                  <Image
+                  key={icon.id}
+                  src={icon?.url}
                   alt={list.icon?.name || "icon"}
                   width={20}
                   height={20}
                   className="mt-1"
                 />
+                ))}
                 <span className="text-sm sm:text-base leading-relaxed">
                   {list.text}
                 </span>
