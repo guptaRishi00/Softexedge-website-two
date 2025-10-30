@@ -4,7 +4,7 @@ import OurMission from "@/components/aboutpage/OurMission";
 import WhyChoose from "@/components/aboutpage/WhyChoose";
 import OurTeam from "@/components/aboutpage/OurTeam";
 import Review from "@/components/aboutpage/Review";
-import WhatWeDo from "@/components/aboutpage/WhatWeDo";
+import WhatWeDo from "@/components/homepage/WhatWeDo";
 import { getPageData } from "@/data/loader";
 
 export default async function AboutPage() {
