@@ -15,11 +15,19 @@ interface List {
   icon?: { url?: string; name?: string };
 }
 
+interface Card {
+  id?: number;
+  title?: string;
+  description?: string;
+  icon?: { url?: string; name?: string };
+}
+
 interface WhyChooseData {
   tag?: string;
   title?: string;
   image?: { url?: string; name?: string };
   lists?: List[];
+  cards?: Card[]; // added for services variant
   button?: {
     text?: string;
     link?: string;
@@ -68,35 +76,60 @@ export default function WhyChoose({ data }: any) {
           </h2>
         )}
 
-        {/* Lists */}
-        <ul className="flex flex-col gap-4 mb-8">
-          {data?.lists?.map((list:any, index:any) => {
-            
-
-            return (
+        {/* Lists (About Page) */}
+        {data?.lists && data?.lists?.length > 0 && (
+          <ul className="flex flex-col gap-4 mb-8">
+            {data?.lists?.map((list: any, index: any) => (
               <li
                 key={list.id || index}
                 className="flex items-start gap-3 text-gray-300"
               >
-                {list?.icon?.map((icon: any) => (
+                {list?.icon?.map?.((icon: any) => (
                   <Image
-                  key={icon.id}
-                  src={icon?.url}
-                  alt={list.icon?.name || "icon"}
-                  width={20}
-                  height={20}
-                  className="mt-1"
-                />
+                    key={icon.id}
+                    src={icon?.url}
+                    alt={list.icon?.name || "icon"}
+                    width={20}
+                    height={20}
+                    className="mt-1"
+                  />
                 ))}
                 <span className="text-sm sm:text-base leading-relaxed">
                   {list.text}
                 </span>
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+        )}
 
-        {/* Button */}
+        {/* Cards (Services Page) */}
+        {data?.cards && data?.cards?.length > 0 && (
+          <div className="grid sm:grid-cols-2 gap-6 mb-8">
+            {data.cards.map((card: any, index: any) => (
+              <div
+                key={card.id || index}
+                className="bg-white/10 p-6 rounded-2xl flex flex-col gap-3 hover:bg-white/20 transition"
+              >
+                {card?.icon?.url && (
+                  <Image
+                    src={
+                      card.icon.url.startsWith("http")
+                        ? card.icon.url
+                        : `${process.env.NEXT_PUBLIC_STRAPI_URL || "https://giving-feast-dfcaa21f17.media.strapiapp.com"}${card.icon.url}`
+                    }
+                    alt={card.icon?.name || "icon"}
+                    width={30}
+                    height={30}
+                  />
+                )}
+                <h3 className="text-lg font-semibold">{card.title}</h3>
+                <p className="text-sm text-gray-300">{card.description}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Button (About Page only) */}
         {data?.button?.text && (
           <Link
             href={data?.button?.link || "#"}
