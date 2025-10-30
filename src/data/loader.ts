@@ -167,82 +167,78 @@ const pageQuery = (slug: string) =>
     populate: {
       blocks: {
         on: {
-          "shared-components.hero-section": {
+          "page.about": {
             populate: {
-              image: { fields: ["url", "name"] },
-
-              letsTalk: {
-                populate: {
-                  images: { fields: ["url", "name"] },
-                },
-              },
-              viewOurWork: true,
-            },
-          },
-          "aboutpage.our-story": {
-            populate: {
-              tag: true,
-              title: true,
-              description: true,
-              button: true,
-            },
-          },
-
-          "aboutpage.our-mission": {
-            populate: {
-              cards: {
+              herosection: {
                 populate: {
                   image: { fields: ["url", "name"] },
+                  letsTalk: {
+                    populate: {
+                      images: { fields: ["url", "name"] },
+                    },
+                  },
+                  viewOurWork: true,
                 },
               },
-            },
-          },
-          "homepage.what-we-do": {
-            populate: {
-              cards: {
+              ourStory: {
                 populate: {
-                  image: {
-                    fields: ["url", "name"],
+                  button: true,
+                },
+              },
+              ourMission: {
+                populate: {
+                  cards: {
+                    populate: {
+                      image: {
+                        fields: ["url", "name"],
+                      },
+                      button: true,
+                    },
+                  },
+                },
+              },
+              whatWeDo: {
+                populate: {
+                  cards: {
+                    populate: {
+                      image: {
+                        fields: ["url", "name"],
+                      },
+                      button: true,
+                    },
+                  },
+                },
+              },
+              whyChoose: {
+                populate: {
+                  image: { fields: ["url", "name"] },
+                  lists: {
+                    populate: {
+                      icon: { fields: ["url", "name"] },
+                    },
                   },
                   button: true,
                 },
               },
-            },
-          },
-
-          "aboutpage.why-choose": {
-            populate: {
-              image: { fields: ["url", "name"] },
-              lists: {
+              ourTeam: {
                 populate: {
-                  icon: { fields: ["url", "name"] },
+                  images: { fields: ["url", "name"] },
+                  button: true,
                 },
               },
-              button: true,
-            },
-          },
-
-          // ✅ Our Team section
-          "aboutpage.our-team": {
-            populate: {
-              images: { fields: ["url", "name"] },
-              button: true,
-            },
-          },
-
-          // ✅ Review/Testimonials section
-          "aboutpage.review": {
-            populate: {
-              cards: {
+              review: {
                 populate: {
-                  icon: { fields: ["url", "name"] },
-                  image: { fields: ["url", "name"] },
-                },
-              },
-              "shared-components.brands": {
-                populate: {
-                  image: {
-                    fields: ["url", "name"],
+                  cards: {
+                    populate: {
+                      icon: { fields: ["url", "name"] },
+
+                      profile: { fields: ["url", "name"] },
+                    },
+                  },
+                  brands: {
+                    populate: {
+                      image: { fields: ["url", "name"] },
+                    },
                   },
                 },
               },

@@ -7,9 +7,13 @@ import OurTeam from "@/components/aboutpage/OurTeam";
 import Review from "@/components/aboutpage/Review";
 import WhatWeDo from "@/components/homepage/WhatWeDo";
 
-export default async function DynamicPage({ params }: { params: { slug: string } }) {
+export default async function DynamicPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   // Fetch page data from Strapi based on slug
-  const response = await getPageData(params.slug);
+  const response = await getPageData(params?.slug);
   const page = response?.data?.[0];
 
   if (!page) {
