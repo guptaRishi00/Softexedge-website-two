@@ -18,7 +18,6 @@ export default async function AboutPage() {
 
     const blocks = page?.attributes?.blocks || page?.blocks || [];
 
-    // Find the "page.about" component
     const aboutBlock = blocks.find(
       (block: any) => block.__component === "page.about"
     );
@@ -33,7 +32,7 @@ export default async function AboutPage() {
     const heroSectionData = aboutBlock.herosection;
     const ourStoryData = aboutBlock.ourStory;
     const ourMissionData = aboutBlock.ourMission;
-    const whatWeDoData = aboutBlock.whatWeDo; 
+    const whatWeDoData = aboutBlock.whatWeDo;
     const whyChooseData = aboutBlock.whyChoose;
     const ourTeamData = aboutBlock.ourTeam;
     const reviewData = aboutBlock.review;

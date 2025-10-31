@@ -28,7 +28,7 @@ export default function PageHeader({ data }: any) {
         className={`${wrapperClassName} md:hidden items-center gap-8 justify-between w-full`}
       >
         <Link href="/">
-          <Image src={data.logo.url} alt="Logo" width={80} height={80} />
+          <Image src={data?.secondLogo.url} alt="Logo" width={80} height={80} />
         </Link>
 
         <button className="text-white p-2" aria-label="Menu">
@@ -54,7 +54,12 @@ export default function PageHeader({ data }: any) {
         className={`${wrapperClassName} hidden md:flex items-center gap-8 justify-between w-full`}
       >
         <Link href="/" className="">
-          <Image src={data.logo.url} alt="Logo" width={120} height={120} />
+          <Image
+            src={data?.secondLogo.url}
+            alt="Logo"
+            width={120}
+            height={120}
+          />
         </Link>
 
         <div className="flex items-center gap-10">
@@ -63,9 +68,7 @@ export default function PageHeader({ data }: any) {
               key={link.id}
               link={link}
               arrowIcon={arrow[index] && arrow[index].icon}
-              // 4. FIXED to text-black for non-homepage pages
               className="text-black"
-              // 5. REMOVED setDropdown
               menus={data?.serviceDropdown}
             />
           ))}
@@ -73,7 +76,7 @@ export default function PageHeader({ data }: any) {
 
         <Link
           href={`/${data.cta.href}`}
-          className="text-black bg-white py-3 px-5 rounded-full text-sm font-medium"
+          className="bg-linear-to-r from-[#3445E7] via-[#2F85EA] to-[#07D6F3] text-white py-3 px-5 rounded-full text-sm font-medium"
         >
           {data.cta.name}
         </Link>

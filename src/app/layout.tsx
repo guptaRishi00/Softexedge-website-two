@@ -1,21 +1,83 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Softexedge",
   description: "We Help Brands Scale",
 };
+
+const itcAvg = localFont({
+  src: [
+    {
+      path: "./fonts/ITC Avant Garde Gothic CE Book.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ITC Avant Garde Gothic CE Book Oblique.otf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/ITC Avant Garde Gothic Medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ITC Avant Garde Gothic Medium Oblique.otf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "./fonts/ITC Avant Garde Gothic CE Demi.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ITC Avant Garde Gothic CE Demi Oblique.otf",
+      weight: "600",
+      style: "italic",
+    },
+    {
+      path: "./fonts/ITC Avant Garde Gothic Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ITC Avant Garde Gothic Bold Oblique.otf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-itc-avg",
+});
+
+const itcAvgCondensed = localFont({
+  src: [
+    {
+      path: "./fonts/ITC Avant Garde Gothic Book Condensed.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ITC Avant Garde Gothic Medium Condensed.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ITC Avant Garde Gothic Demi Condensed.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ITC Avant Garde Gothic Bold Condensed.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-itc-avg-condensed",
+});
 
 export default async function RootLayout({
   children,
@@ -25,7 +87,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${itcAvg.variable} ${itcAvgCondensed.variable} antialiased`}
       >
         {children}
       </body>
