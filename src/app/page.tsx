@@ -7,10 +7,14 @@ import Project from "@/components/homepage/Project";
 import WhatWeDo from "@/components/homepage/WhatWeDo";
 import WhyChoose from "@/components/homepage/WhyChoose";
 
-import { getHomepageData } from "@/data/loader";
+import { getGlobalData, getHomepageData } from "@/data/loader";
 
 export default async function Home() {
   const response = await getHomepageData();
+
+  const header = await getGlobalData();
+
+  const headerData = header.data.header;
 
   const heroSectionData = response.data.blocks.find(
     (block: any) => block.__component === "shared-components.hero-section"
@@ -42,7 +46,7 @@ export default async function Home() {
 
   return (
     <div className="p-3 space-y-10">
-      <HeroSection data={heroSectionData} />
+      <HeroSection data={heroSectionData} headerData={headerData} />
       <Brands data={brands} />
       <About data={about} />
       <WhatWeDo data={whatWeDo} />

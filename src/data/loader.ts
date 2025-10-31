@@ -10,6 +10,11 @@ const globalQuery = qs.stringify({
         logo: { fields: ["url", "name"] },
         links: true,
         cta: true,
+        serviceDropdown: {
+          populate: {
+            logo: { fields: ["url", "name"] },
+          },
+        },
       },
     },
   },

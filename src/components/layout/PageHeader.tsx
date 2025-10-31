@@ -1,10 +1,10 @@
-import { getGlobalData } from "@/data/loader";
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { IoIosArrowDown } from "react-icons/io";
-// No longer import Dropdown here
-import NavLinkItem from "./NavLinkItem"; // Import the new component
+import NavLinkItem from "./NavLinkItem";
+import { usePathname } from "next/navigation";
 
 type link = {
   id: string;
@@ -13,12 +13,20 @@ type link = {
   isExternal: boolean;
 };
 
-export default function Header({ data, setDropdown }: any) {
+export default function PageHeader({ data }: any) {
   const arrow = [{ icon: <IoIosArrowDown /> }, { icon: <IoIosArrowDown /> }];
+
+  const pathname = usePathname();
+
+  console.log("pathname", pathname);
+
+  const wrapperClassName = pathname === "/" ? "hidden" : "flex";
 
   return (
     <>
-      <div className="flex md:hidden items-center justify-between w-full">
+      <div
+        className={`${wrapperClassName} md:hidden items-center gap-8 justify-between w-full`}
+      >
         <Link href="/">
           <Image src={data.logo.url} alt="Logo" width={80} height={80} />
         </Link>
@@ -41,7 +49,10 @@ export default function Header({ data, setDropdown }: any) {
       </div>
 
       {/* Desktop Header */}
-      <div className="hidden md:flex items-center gap-8 justify-between w-full">
+      {/* 3. APPLIED the same logic here */}
+      <div
+        className={`${wrapperClassName} hidden md:flex items-center gap-8 justify-between w-full`}
+      >
         <Link href="/" className="">
           <Image src={data.logo.url} alt="Logo" width={120} height={120} />
         </Link>
@@ -52,8 +63,9 @@ export default function Header({ data, setDropdown }: any) {
               key={link.id}
               link={link}
               arrowIcon={arrow[index] && arrow[index].icon}
-              className="text-white"
-              setDropdown={setDropdown}
+              // 4. FIXED to text-black for non-homepage pages
+              className="text-black"
+              // 5. REMOVED setDropdown
               menus={data?.serviceDropdown}
             />
           ))}
