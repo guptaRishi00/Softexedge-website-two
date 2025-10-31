@@ -31,9 +31,7 @@ interface OurStoryProps {
 
 export default function OurStory({ data }: OurStoryProps) {
   const imageUrl =
-    data?.image?.data?.attributes?.url ||
-    (data as any)?.image?.url ||
-    ""; // fallback if structure differs
+    data?.image?.data?.attributes?.url || (data as any)?.image?.url || ""; // fallback if structure differs
 
   const button = data?.button;
   const buttonLogo = button?.logo?.data?.attributes;
@@ -82,7 +80,7 @@ export default function OurStory({ data }: OurStoryProps) {
         {button?.href && (
           <Link
             href={button.href}
-            className="flex items-center gap-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium px-6 py-2 rounded-full hover:opacity-90 transition w-fit"
+            className="flex items-center gap-3 bg-linear-to-r from-blue-500 to-purple-500 text-white font-medium px-6 py-2 rounded-full hover:opacity-90 transition w-fit"
           >
             {/* Logo if available */}
             {buttonLogo?.url && (

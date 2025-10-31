@@ -10,7 +10,6 @@ import { getPageData } from "@/data/loader";
 export default async function AboutPage() {
   try {
     const response = await getPageData("about");
-    console.log("🧠 About Page Data:", JSON.stringify(response, null, 2));
 
     const page = response?.data?.[0];
     if (!page) {
@@ -45,7 +44,6 @@ export default async function AboutPage() {
         {ourStoryData && <OurStory data={ourStoryData} />}
         {ourMissionData && <OurMission data={ourMissionData} />}
 
-        
         {whatWeDoData && <WhatWeDo data={whatWeDoData} />}
 
         {whyChooseData && <WhyChoose data={whyChooseData} />}

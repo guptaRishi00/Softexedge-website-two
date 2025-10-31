@@ -9,6 +9,11 @@ const globalQuery = qs.stringify({
         logo: { fields: ["url", "name"] },
         links: true,
         cta: true,
+        serviceDropdown: {
+          populate: {
+            logo: { fields: ["url", "name"] },
+          },
+        },
       },
     },
   },
@@ -129,7 +134,6 @@ export async function getHomepageData() {
   return await fetchAPI(url.href, { method: "GET" });
 }
 
-// ✅ PAGE QUERY (ABOUT + SERVICES)
 const pageQuery = (slug: string) =>
   qs.stringify(
     {

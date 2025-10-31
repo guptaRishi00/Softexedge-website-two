@@ -21,7 +21,7 @@ export default function WhatWeDo({ data }: any) {
   }, [showNext, data?.cards?.length]);
 
   return (
-    <div className="h-screen bg-black rounded-3xl flex flex-col items-center py-10  lg:justify-center lg:gap-16 lg:py-10 lg:px-20 overflow-hidden">
+    <div className="h-screen bg-black rounded-3xl flex flex-col items-center lg:justify-center py-10 lg:gap-16 lg:py-10 lg:px-20 overflow-hidden">
       <div className="flex flex-col items-center justify-center gap-3">
         <p className="bg-white/10 text-white py-2 px-4 rounded-full">
           {data?.title}
