@@ -45,7 +45,7 @@ export default function HeroSection({ data, headerData }: any) {
           <p className="bg-white/10 text-white py-2 px-4 rounded-full">
             {data?.subtitle}
           </p>
-          <h1 className="font-bold text-2xl lg:text-7xl flex flex-col items-center lg:gap-1 text-white">
+          <h1 className="font-medium text-2xl lg:text-7xl flex flex-col items-center lg:gap-1 text-white">
             <span className="">{part1}</span>
             <span className="flex items-center lg:gap-2">
               <span className="">{part2}</span>
@@ -89,7 +89,7 @@ export default function HeroSection({ data, headerData }: any) {
         </div>
 
         <div className="flex items-center lg:justify-between">
-          <p className="text-white font-medium text-center lg:text-start lg:text-base text-xs lg:max-w-md">
+          <p className="text-white text-center lg:text-start lg:text-base text-xs lg:max-w-md">
             {data?.description}
           </p>
           <Button

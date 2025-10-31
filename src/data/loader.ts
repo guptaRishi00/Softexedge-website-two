@@ -8,6 +8,7 @@ const globalQuery = qs.stringify({
     header: {
       populate: {
         logo: { fields: ["url", "name"] },
+        secondLogo: { fields: ["url", "name"] },
         links: true,
         cta: true,
         serviceDropdown: {
@@ -117,7 +118,6 @@ export async function getHomepageData() {
   return await fetchAPI(url.href, { method: "GET" });
 }
 
-// 🧠 Separate populate options per page type
 function buildPageQuery(slug: string) {
   let populateOptions = {};
 
@@ -137,7 +137,12 @@ function buildPageQuery(slug: string) {
                     viewOurWork: true,
                   },
                 },
-                ourStory: { populate: { button: true } },
+                ourStory: {
+                  populate: {
+                    button: true,
+                    image: { fields: ["url", "name"] },
+                  },
+                },
                 ourMission: {
                   populate: {
                     cards: {
