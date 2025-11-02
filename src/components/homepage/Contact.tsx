@@ -7,7 +7,7 @@ export default function Contact({ data }: any) {
     // Added mobile-first padding `px-4`
     <div className="h-auto bg-black rounded-3xl flex flex-col items-center py-10 px-4 lg:gap-16 lg:py-10 lg:px-12 overflow-hidden">
       <div className="flex flex-col items-center justify-center gap-3">
-        <p className="bg-white/10 text-white py-2 px-5 rounded-full">
+        <p className="bg-white/10 text-white pt-3 pb-2 px-5 rounded-full">
           {data?.tag}
         </p>
         <h1 className="font-medium text-4xl lg:text-6xl flex flex-col text-center items-center lg:gap-2 text-white">
@@ -26,7 +26,7 @@ export default function Contact({ data }: any) {
 
           {/* Added responsive padding */}
           <div className="relative z-10 flex flex-col items-start justify-center gap-8 p-6 lg:p-12 h-full">
-            <p className="bg-white/10 text-white py-2 px-5 rounded-full">
+            <p className="bg-white/10 text-white pt-3 pb-2 px-5 rounded-full">
               {data?.leftCard?.tag}
             </p>
             <h1 className="font-medium text-4xl lg:text-6xl flex flex-col text-start lg:gap-2 text-white">
@@ -34,31 +34,6 @@ export default function Contact({ data }: any) {
             </h1>
             <p className="text-white max-w-md">{data?.leftCard?.description}</p>
           </div>
-
-          {/* <div className="absolute inset-0 flex items-center justify-around w-full gap-5 ">
-            {data?.cards.map((card: any) => (
-              <div
-                className=" bg-white flex flex-col items-start p-5 "
-                key={card.id}
-              >
-                <BiSolidQuoteAltLeft />
-                <p className="">{card?.text}</p>
-                <div className="flex ">
-                  <Image
-                    src={card?.profile?.url}
-                    width={50}
-                    height={50}
-                    alt="card image"
-                    className="mx-auto w-5"
-                  />
-                  <div className="">
-                    <p className="text-white">{card?.name}</p>
-                    <p className="text-white">{card?.designation}</p>
-                  </div>
-          _       </div>
-              </div>
-  nbsp;         ))}
-          </div> */}
         </div>
 
         {/* form */}

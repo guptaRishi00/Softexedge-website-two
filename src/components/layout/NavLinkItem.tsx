@@ -45,7 +45,7 @@ export default function NavLinkItem({
         </Link>
 
         {hasDropdown && (
-          <span className="pt-1 cursor-pointer " onClick={toggleDropdown}>
+          <span className=" cursor-pointer " onClick={toggleDropdown}>
             {arrowIcon}
           </span>
         )}

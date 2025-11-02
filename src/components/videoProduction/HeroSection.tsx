@@ -4,23 +4,23 @@ import React from "react";
 import Image from "next/image";
 import LinkComp from "../LinkComp";
 
-export default function HeroSectionAbout({ data }: any) {
+export default function HeroSection({ data }: any) {
   const letsTalkTheme = data?.letsTalk.theme;
 
   return (
-    <section className="w-full h-screen bg-white px-5 py-6 lg:pt-24 top-0 left-0 lg:px-19">
-      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16">
-        <div className=" space-y-5 text-center lg:text-left">
-          <p className="inline-block bg-[#0000001A] text-black text-sm px-5 py-2 rounded-full">
+    <section className="w-full h-auto bg-white px-5 py-6 lg:pt-24 top-0 left-0 lg:px-18">
+      <div className="w-full flex flex-col lg:flex-row items-start gap-10 lg:gap-20 ">
+        <div className="space-y-9 flex flex-col items-center lg:items-start justify-between text-center lg:text-start  h-full">
+          <p className="inline-block bg-[#0000001A] text-black text-sm px-5 py-2 rounded-full w-fit">
             {data?.subtitle}
           </p>
 
           {/* Title */}
-          <h1 className="text-2xl sm:text-5xl lg:text-8xl font-medium text-black">
+          <h1 className="text-2xl sm:text-5xl lg:text-6xl max-w-4xl font-medium text-black">
             {data?.title}
           </h1>
 
-          <p className="text-black mx-auto lg:mx-0 text-xs lg:text-xl">
+          <p className="text-black mx-auto lg:mx-0 text-xs lg:max-w-6xl lg:text-xl ">
             {data?.description}
           </p>
 
@@ -54,13 +54,13 @@ export default function HeroSectionAbout({ data }: any) {
         </div>
 
         {/* RIGHT SINGLE IMAGE */}
-        <div className=" w-full mx-auto relative">
+        <div className=" mx-auto h-full overflow-hidden lg:flex items-center justify-end relative">
           <Image
             src={data?.image?.url}
             alt={data?.title || "About Hero Image"}
-            width={800}
-            height={800}
-            className="object-cover w-full h-auto"
+            width={600}
+            height={600}
+            className="object-cover "
             priority
           />
         </div>

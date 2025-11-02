@@ -37,7 +37,7 @@ export default function WhatWeDo({ data }: any) {
             className="bg-[#121212] h-full w-full flex flex-col px-5 py-5 items-start justify-around gap-8 rounded-3xl"
             key={card.id}
           >
-            <p className="border border-[#FFFFFF14] text-xs rounded-full py-2 px-5 text-white">
+            <p className="border border-[#FFFFFF14] text-xs flex items-center rounded-full pt-3 pb-2 px-5 text-white">
               {card.tag}
             </p>
             <Image
@@ -54,7 +54,7 @@ export default function WhatWeDo({ data }: any) {
             <LinkComp
               href={card?.button.href || "/"}
               color={card?.button.theme}
-              className="px-5 p-3 text-xs border border-[#2C2C2C]"
+              className="px-5 pt-3 pb-2 text-xs border border-[#2C2C2C]"
             >
               {card?.button.text}
             </LinkComp>

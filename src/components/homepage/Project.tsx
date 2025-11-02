@@ -23,7 +23,7 @@ export default function Project({ data }: any) {
   return (
     <div className="h-auto bg-black rounded-3xl flex flex-col items-center py-10 lg:gap-16 lg:py-10 lg:px-20 overflow-hidden">
       <div className="flex flex-col items-center justify-center gap-3">
-        <p className="bg-white/10 text-white py-2 px-4 rounded-full">
+        <p className="bg-white/10 text-white pt-3 pb-2 px-4 rounded-full">
           {data?.tag}
         </p>
         <h1 className="font-medium text-4xl lg:text-6xl flex flex-col text-center items-center lg:gap-2 text-white">

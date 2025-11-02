@@ -16,7 +16,7 @@ export default function WhyChoose({ data }: any) {
       {/* Text Content Section */}
       <div className="w-full lg:w-1/2">
         <div className="flex flex-col items-center lg:items-start justify-center gap-8 px-5 lg:px-0">
-          <p className="bg-white/10 text-white lg:text-base text-sm py-2 px-4 rounded-full">
+          <p className="bg-white/10 text-white lg:text-base text-sm pt-3 pb-2 px-4 rounded-full">
             {data?.tag}
           </p>
           <h1 className="font-medium text-2xl lg:text-5xl flex flex-col text-center items-center lg:text-start lg:items-start gap-2 lg:gap-5 text-white">

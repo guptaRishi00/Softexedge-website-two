@@ -1,15 +1,15 @@
-import HeroSection from "@/components/servicepage/HeroSectionService";
-import WhyChoose from "@/components/servicepage/WhyChoose";
 import OurServices from "@/components/servicepage/OurServices";
 import OurCase from "@/components/homepage/OurCase";
 import OurProcess from "@/components/servicepage/OurProcess";
 import ClientReview from "@/components/servicepage/ClientReview";
 import ContactUs from "@/components/servicepage/ContactUs";
 import { getPageData } from "@/data/loader";
+import HeroSection from "@/components/videoProduction/HeroSection";
+import WhyChoose from "@/components/videoProduction/WhyChoose";
 
-export default async function ServicesPage() {
+export default async function VideoProduction() {
   try {
-    const response = await getPageData("services");
+    const response = await getPageData("video-production");
     console.log("🧠 Services Page Data:", JSON.stringify(response, null, 2));
 
     const page = response?.data?.[0];
@@ -19,7 +19,6 @@ export default async function ServicesPage() {
 
     const blocks = page?.attributes?.blocks || page?.blocks || [];
 
-    // Find the "page.services" block
     const servicesBlock = blocks.find(
       (block: any) => block.__component === "page.service"
     );

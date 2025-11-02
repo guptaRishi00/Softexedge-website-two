@@ -1,211 +1,147 @@
 "use client";
-
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import LinkComp from "../LinkComp";
 
-interface OurServicesProps {
-  data: {
-    title?: string;
-    description?: string;
-    cards?: {
-      id?: number;
-      title?: string;
-      description?: string;
-      image?: {
-        data?: {
-          attributes?: { url?: string; name?: string };
-        };
-      };
-      button?: {
-        text?: string;
-        link?: string;
-      };
-      lists?: {
-        id?: number;
-        text?: string;
-        icon?: {
-          data?: { attributes?: { url?: string; name?: string } };
-        };
-      }[];
-    }[];
-  };
-}
-
-export default function OurServices({ data }: OurServicesProps) {
+export default function OurServices({ data }: any) {
   if (!data) return null;
 
-  const strapiUrl =
-    process.env.NEXT_PUBLIC_STRAPI_URL || "https://your-strapi-domain.com";
-
   const cards = data?.cards || [];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const showNext = useCallback(() => {
+    setCurrentIndex((index) => {
+      if (index === cards.length - 1) return 0;
+      return index + 1;
+    });
+  }, [cards.length]);
+
+  useEffect(() => {
+    if (cards.length > 0) {
+      const interval = setInterval(showNext, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [showNext, cards.length]);
+
+  const MobileCard = ({ card }: any) => (
+    <div className="flex flex-col gap-6 p-2 w-full items-center">
+      <span className="bg-white/10 text-white pt-2 pb-1 px-5 text-xs rounded-full w-fit">
+        {card?.tag}
+      </span>
+
+      <h2 className="text-xl font-medium text-center">{card?.title}</h2>
+
+      <p className="text-gray-400 text-center">{card?.description}</p>
+
+      <div className="rounded-lg w-full">
+        <Image
+          src={card?.image?.url}
+          alt={card?.title}
+          width={700}
+          height={700}
+          className="object-cover w-full rounded-lg"
+        />
+      </div>
+
+      <div className="flex flex-col gap-4">
+        {card?.lists.map((list: any) => (
+          <div className="flex items-center gap-3" key={list.id}>
+            <div className="w-1.5 h-1.5 rounded-full bg-linear-to-r from-[#3445E7] via-[#2F85EA] to-[#07D6F3]"></div>
+            <p>{list.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <LinkComp
+        color={card?.button?.theme || "blue"}
+        href={card?.button?.href || "/"}
+        className="flex items-center gap-3 text-white font-medium px-10 text-xs text-center py-3 justify-center w-full"
+      >
+        {card?.button?.text}
+      </LinkComp>
+    </div>
+  );
+
+  const DesktopCard = ({ card }: any) => (
+    <div className="flex items-center justify-center gap-10">
+      <div className="relative rounded-lg w-auto">
+        <Image
+          src={card?.image?.url}
+          alt={card?.title}
+          width={700}
+          height={700}
+          className="object-cover w-[700px] h-[700px] rounded-2xl"
+        />
+      </div>
+
+      <div className="flex flex-col gap-8 items-start">
+        <span className="bg-white/10 text-white pt-2 pb-1 px-5 rounded-full">
+          {card?.tag}
+        </span>
+        <h2 className="text-6xl max-w-2xl font-medium">{card?.title}</h2>
+        <p className="text-gray-400 max-w-2xl text-lg">{card?.description}</p>
+
+        {card?.lists.map((list: any) => (
+          <div className="flex items-center gap-3" key={list.id}>
+            <div className="w-2 h-2 rounded-full bg-linear-to-r from-[#3445E7] via-[#2F85EA] to-[#07D6F3]"></div>
+            <p>{list.text}</p>
+          </div>
+        ))}
+
+        <LinkComp
+          color={card?.button?.theme || "blue"}
+          href={card?.button?.href || "/"}
+          className="flex items-center gap-3 text-white font-medium px-10 py-3 justify-center w-fit"
+        >
+          {card?.button?.text}
+        </LinkComp>
+      </div>
+    </div>
+  );
 
   return (
-    <section className="w-full bg-black text-white rounded-2xl py-20 px-6 md:px-12 space-y-10">
-      {/* Header */}
-      <div className="text-center space-y-3">
-        <span className="inline-block px-4 py-1 text-sm rounded-full bg-gray-800 text-gray-300">
-          Our Service
+    <section className="w-full h-auto bg-black text-white rounded-2xl py-20 px-6 md:px-12 space-y-10 overflow-hidden">
+      <div className="flex flex-col items-center justify-center text-center gap-10">
+        <span className="bg-white/10 text-white pt-3 pb-2 px-5 rounded-full">
+          {data?.tag}
         </span>
-        <h2 className="text-3xl md:text-4xl font-semibold">
-          Our core digital marketing services
-        </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          Get discovered where it matters most — our SEO and digital marketing
-          services are designed for long-term visibility and credibility.
+        <h2 className="text-3xl lg:text-6xl font-medium">{data?.title}</h2>
+        <p className="text-gray-400 lg:max-w-5xl mx-auto lg:text-lg">
+          {data?.description}
         </p>
       </div>
 
-      {/* Cards Grid (Desktop) */}
-      <div className="hidden md:grid md:grid-cols-2 gap-10">
-        {cards.map((card) => {
-          const imgUrl = card?.image?.data?.attributes?.url
-            ? card.image.data.attributes.url.startsWith("http")
-              ? card.image.data.attributes.url
-              : `${strapiUrl}${card.image.data.attributes.url}`
-            : "/placeholder.png";
-
-          return (
-            <div
-              key={card.id}
-              className="bg-[#111111] rounded-2xl overflow-hidden flex flex-col md:flex-row items-center md:items-start"
-            >
-              {/* Left: Image */}
-              <div className="md:w-1/2 w-full">
-                <Image
-                  src={imgUrl}
-                  alt={card.title || "Service"}
-                  width={600}
-                  height={400}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-
-              {/* Right: Content */}
-              <div className="md:w-1/2 w-full p-6 flex flex-col space-y-4">
-                {card.title && (
-                  <span className="text-sm text-gray-300 bg-gray-800 px-3 py-1 rounded-full w-fit">
-                    {card.title}
-                  </span>
-                )}
-
-                {card.description && (
-                  <h3 className="text-2xl font-semibold">{card.description}</h3>
-                )}
-
-                {/* Lists */}
-                {card.lists && card.lists.length > 0 && (
-                  <ul className="space-y-2 mt-2">
-                    {card.lists.map((item) => {
-                      const iconUrl =
-                        item.icon?.data?.attributes?.url &&
-                        (item.icon.data.attributes.url.startsWith("http")
-                          ? item.icon.data.attributes.url
-                          : `${strapiUrl}${item.icon.data.attributes.url}`);
-                      return (
-                        <li
-                          key={item.id}
-                          className="flex items-center gap-2 text-gray-300"
-                        >
-                          {iconUrl && (
-                            <Image
-                              src={iconUrl}
-                              alt={item.text || "icon"}
-                              width={18}
-                              height={18}
-                            />
-                          )}
-                          <span>{item.text}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-
-                {/* Button */}
-                {card.button?.text && (
-                  <Link
-                    href={card.button.link || "#"}
-                    className="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-full transition"
-                  >
-                    {card.button.text}
-                  </Link>
-                )}
-              </div>
-            </div>
-          );
-        })}
+      <div className="hidden lg:flex flex-col w-full items-start justify-center gap-10">
+        {cards.map((card: any) => (
+          <DesktopCard key={card.id} card={card} />
+        ))}
       </div>
 
-      {/* Mobile Carousel */}
-      <div className="md:hidden flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory">
-        {cards.map((card) => {
-          const imgUrl = card?.image?.data?.attributes?.url
-            ? card.image.data.attributes.url.startsWith("http")
-              ? card.image.data.attributes.url
-              : `${strapiUrl}${card.image.data.attributes.url}`
-            : "/placeholder.png";
-
-          return (
-            <div
-              key={card.id}
-              className="min-w-[85%] bg-[#111111] rounded-2xl overflow-hidden flex-shrink-0 snap-start"
-            >
-              <Image
-                src={imgUrl}
-                alt={card.title || "Service"}
-                width={600}
-                height={400}
-                className="object-cover w-full h-52"
-              />
-              <div className="p-6 space-y-3">
-                {card.title && (
-                  <span className="text-sm text-gray-300 bg-gray-800 px-3 py-1 rounded-full w-fit">
-                    {card.title}
-                  </span>
-                )}
-                {card.description && (
-                  <h3 className="text-xl font-semibold">{card.description}</h3>
-                )}
-                {card.lists && card.lists.length > 0 && (
-                  <ul className="space-y-2 mt-2">
-                    {card.lists.map((item) => {
-                      const iconUrl =
-                        item.icon?.data?.attributes?.url &&
-                        (item.icon.data.attributes.url.startsWith("http")
-                          ? item.icon.data.attributes.url
-                          : `${strapiUrl}${item.icon.data.attributes.url}`);
-                      return (
-                        <li
-                          key={item.id}
-                          className="flex items-center gap-2 text-gray-300"
-                        >
-                          {iconUrl && (
-                            <Image
-                              src={iconUrl}
-                              alt={item.text || "icon"}
-                              width={18}
-                              height={18}
-                            />
-                          )}
-                          <span>{item.text}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-                {card.button?.text && (
-                  <Link
-                    href={card.button.link || "#"}
-                    className="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-full transition"
-                  >
-                    {card.button.text}
-                  </Link>
-                )}
-              </div>
+      <div className="lg:hidden w-full overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(${-100 * currentIndex}%)` }}
+        >
+          {cards.map((card: any) => (
+            <div className="w-full shrink-0 grow-0" key={card.id}>
+              <MobileCard card={card} />
             </div>
-          );
-        })}
+          ))}
+        </div>
+      </div>
+
+      <div className="flex lg:hidden justify-center items-center gap-3 pt-4">
+        {cards.map((_: any, index: any) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`h-2 w-2 rounded-full border border-white transition-colors ${
+              index === currentIndex
+                ? "bg-white"
+                : "bg-transparent hover:bg-white/50"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );

@@ -42,7 +42,7 @@ export default function HeroSection({ data, headerData }: any) {
       <div className="absolute inset-0 bg-gray-800/30 backdrop-blur-sm flex flex-col justify-between gap-8 px-5 py-6 lg:p-10">
         <div className=""></div>
         <div className="flex flex-col items-center gap-10 text-center lg:gap-5">
-          <p className="bg-white/10 text-white py-2 px-4 rounded-full">
+          <p className="bg-white/10 text-white pt-3 pb-2 px-4 rounded-full">
             {data?.subtitle}
           </p>
           <h1 className="font-medium text-2xl lg:text-7xl flex flex-col items-center lg:gap-1 text-white">
@@ -81,7 +81,7 @@ export default function HeroSection({ data, headerData }: any) {
             <LinkComp
               href={data?.viewOurWork?.href}
               color={viewOurWorkTheme}
-              className="font-regular flex items-center lg:py-3 lg:px-5 px-5 py-2 gap-3 lg:text-lg"
+              className="font-regular flex items-center lg:pt-3 lg:pb-2 lg:px-5 px-5 py-2 gap-3 lg:text-lg"
             >
               {data?.viewOurWork?.text}
             </LinkComp>

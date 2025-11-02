@@ -9,13 +9,13 @@ export default function OurCase({ data }: any) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const cards = data?.cards[activeTab];
-  const theme = cards?.button.theme;
+  const theme = cards?.button?.theme;
 
   return (
     <div className="h-auto bg-black rounded-3xl lg:grid lg:grid-cols-2 py-10 lg:gap-16 lg:py-10 lg:px-12 overflow-hidden">
       <div className="flex flex-col items-start justify-between h-full">
         <div className="flex flex-col items-center lg:items-start justify-center gap-8 px-5 lg:px-0">
-          <p className="bg-white/10 text-white py-2 px-4 rounded-full">
+          <p className="bg-white/10 text-white pt-3 pb-2 px-4 rounded-full">
             {data?.tag}
           </p>
           <h1 className="font-medium text-2xl lg:text-6xl flex flex-col text-center items-center lg:items-start gap-2 lg:gap-5 text-white">
@@ -55,17 +55,19 @@ export default function OurCase({ data }: any) {
         <div className="flex items-center justify-between">
           <h1 className="text-white text-2xl font-medium">{cards.title}</h1>
           <Button color={theme} className="px-5">
-            {cards?.button.text}
+            {cards?.button?.text}
           </Button>
         </div>
         <div className="w-full lg:h-[330px] p-2 overflow-hidden rounded-sm">
-          <Image
-            src={cards?.image?.url}
-            width={300}
-            height={300}
-            alt="card image"
-            className="w-full object-cover object-center mx-auto rounded-sm"
-          />
+          {cards?.image?.url && (
+            <Image
+              src={cards.image.url}
+              width={300}
+              height={300}
+              alt="card image"
+              className="w-full object-cover object-center mx-auto"
+            />
+          )}
         </div>
 
         <div className="flex flex-col gap-5">
@@ -106,18 +108,23 @@ export default function OurCase({ data }: any) {
                       {card.title}
                     </h1>
 
-                    <Button color={card?.button.theme} className="text-xs px-5">
-                      {card?.button.text}
+                    <Button
+                      color={card?.button?.theme || "blue"}
+                      className="text-xs px-5"
+                    >
+                      {card?.button?.text}
                     </Button>
                   </div>
                   <div className="w-full h-auto p-2 overflow-hidden ">
-                    <Image
-                      src={card?.image?.url}
-                      width={300}
-                      height={300}
-                      alt="card image"
-                      className="w-full object-cover object-center mx-auto"
-                    />
+                    {card?.image?.url && (
+                      <Image
+                        src={card.image.url}
+                        width={300}
+                        height={300}
+                        alt="card image"
+                        className="w-full object-cover object-center mx-auto"
+                      />
+                    )}
                   </div>
                   <div className="flex flex-col gap-5">
                     <div className="flex gap-5 lg:text-lg">

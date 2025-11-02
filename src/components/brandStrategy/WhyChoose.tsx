@@ -31,7 +31,7 @@ export default function WhyChoose({ data }: WhyChooseProps) {
   const imageUrl = data?.image?.url;
 
   return (
-    <section className="bg-black h-auto text-white rounded-3xl px-5 py-10 lg:py-10 lg:px-10 my-10 space-y-10">
+    <section className="bg-black h-screen text-white rounded-3xl px-5 py-10 lg:py-10 lg:px-10 my-10 space-y-10">
       <div className="lg:grid lg:grid-cols-2 flex flex-col items-center gap-16">
         <div className="lg:hidden flex flex-col items-center justify-center gap-4 mab-5">
           {data?.tag && (
@@ -73,7 +73,7 @@ export default function WhyChoose({ data }: WhyChooseProps) {
           )}
 
           {data?.title && (
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl lg:max-w-156 font-medium leading-snug">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl lg:max-w-156 font-medium leading-snug">
               {data.title}
             </h2>
           )}
