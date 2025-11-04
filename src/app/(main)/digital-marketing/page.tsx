@@ -10,7 +10,6 @@ import { getPageData } from "@/data/loader";
 export default async function DigitalMarketingPage() {
   try {
     const response = await getPageData("digital-marketing");
-    console.log("🧠 Services Page Data:", JSON.stringify(response, null, 2));
 
     const page = response?.data?.[0];
     if (!page) {

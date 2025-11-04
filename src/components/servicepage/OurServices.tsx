@@ -84,7 +84,12 @@ export default function OurServices({ data }: any) {
         {card?.lists.map((list: any) => (
           <div className="flex items-center gap-3" key={list.id}>
             <div className="w-2 h-2 rounded-full bg-linear-to-r from-[#3445E7] via-[#2F85EA] to-[#07D6F3]"></div>
-            <p>{list.text}</p>
+            <div className="flex flex-col">
+              <p>{list.text}</p>
+              {list.description && (
+                <p className="text-[#FFFFFF] text-xs">{list.description}</p>
+              )}
+            </div>
           </div>
         ))}
 

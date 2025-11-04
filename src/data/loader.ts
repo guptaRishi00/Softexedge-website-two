@@ -1,6 +1,5 @@
 import { fetchAPI } from "@/utils/fetch-api";
 import { getStrapiURL } from "@/utils/get-strapi-url";
-import { listeners } from "process";
 import qs from "qs";
 
 const globalQuery = qs.stringify({
@@ -602,6 +601,94 @@ function buildPageQuery(slug: string) {
                       },
                     },
                     viewWork: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  } else if (slug === "contact") {
+    populateOptions = {
+      populate: {
+        blocks: {
+          on: {
+            "page.contact": {
+              populate: {
+                herosection: {
+                  populate: {
+                    image: { fields: ["url", "name"] },
+                  },
+                },
+                contact: {
+                  populate: {
+                    image: { fields: ["url", "name"] },
+                  },
+                },
+                contactInfo: {
+                  populate: {
+                    cards: {
+                      populate: {
+                        icon: { fields: ["url", "name"] },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  } else if (slug === "careers") {
+    populateOptions = {
+      populate: {
+        blocks: {
+          on: {
+            "page.careers": {
+              populate: {
+                herosection: {
+                  populate: {
+                    image: { fields: ["url", "name"] },
+                  },
+                },
+                whyWorkWithUs: {
+                  populate: {
+                    image: { fields: ["url", "name"] },
+                    lists: {
+                      populate: {
+                        icon: { fields: ["url", "name"] },
+                      },
+                    },
+                  },
+                },
+                howWeWork: {
+                  populate: {
+                    cards: {
+                      populate: {
+                        image: { fields: ["url", "name"] },
+                      },
+                    },
+                  },
+                },
+                positions: {
+                  populate: {
+                    jobs: {
+                      populate: {
+                        tags: true,
+                        button: true,
+                      },
+                    },
+                  },
+                },
+                ourProcess: {
+                  populate: {
+                    cards: {
+                      populate: {
+                        image: { fields: ["url", "name"] },
+                      },
+                    },
                   },
                 },
               },

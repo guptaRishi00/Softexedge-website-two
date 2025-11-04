@@ -10,7 +10,6 @@ import WhyChoose from "@/components/brandStrategy/WhyChoose";
 export default async function BrandStrategy() {
   try {
     const response = await getPageData("brand-strategy");
-    console.log("🧠 Services Page Data:", JSON.stringify(response, null, 2));
 
     const page = response?.data?.[0];
     if (!page) {

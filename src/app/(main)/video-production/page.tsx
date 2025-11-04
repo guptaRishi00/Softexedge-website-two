@@ -6,11 +6,11 @@ import ContactUs from "@/components/servicepage/ContactUs";
 import { getPageData } from "@/data/loader";
 import HeroSection from "@/components/videoProduction/HeroSection";
 import WhyChoose from "@/components/videoProduction/WhyChoose";
+import VideoWorks from "@/components/videoProduction/VideoWorks";
 
 export default async function VideoProduction() {
   try {
     const response = await getPageData("video-production");
-    console.log("🧠 Services Page Data:", JSON.stringify(response, null, 2));
 
     const page = response?.data?.[0];
     if (!page) {
@@ -39,12 +39,14 @@ export default async function VideoProduction() {
     const ourProcessData = servicesBlock.ourProcess;
     const clientReviewData = servicesBlock.clientReview;
     const contactUsData = servicesBlock.contactUs;
+    const videoWorksData = servicesBlock.videoWorks;
 
     return (
       <main className="p-3 space-y-10">
         {heroSectionData && <HeroSection data={heroSectionData} />}
         {whyChooseData && <WhyChoose data={whyChooseData} />}
         {ourServicesData && <OurServices data={ourServicesData} />}
+        {videoWorksData && <VideoWorks data={videoWorksData} />}
         {ourCaseData && <OurCase data={ourCaseData} />}
         {ourProcessData && <OurProcess data={ourProcessData} />}
         {clientReviewData && <ClientReview data={clientReviewData} />}

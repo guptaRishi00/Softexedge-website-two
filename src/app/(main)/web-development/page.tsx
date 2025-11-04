@@ -10,7 +10,6 @@ import WhyChoose from "@/components/videoProduction/WhyChoose";
 export default async function WebDevelopment() {
   try {
     const response = await getPageData("web-development");
-    console.log("🧠 Services Page Data:", JSON.stringify(response, null, 2));
 
     const page = response?.data?.[0];
     if (!page) {

@@ -1,6 +1,4 @@
-import Image from "next/image";
 import React from "react";
-import { BiSolidQuoteAltLeft } from "react-icons/bi";
 
 export default function Contact({ data }: any) {
   return (

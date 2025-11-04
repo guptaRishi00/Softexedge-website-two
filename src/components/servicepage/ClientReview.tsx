@@ -7,8 +7,6 @@ import LogoLoop from "@/components/LogoLoop";
 export default function ClientReview({ data }: any) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  console.log("Client Review Data:", data.brands[0].image);
-
   const cards = data?.reviews || [];
 
   const showNext = useCallback(() => {
