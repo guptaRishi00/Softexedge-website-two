@@ -2,12 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    unoptimized: true,
+
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "giving-feast-dfcaa21f17.media.strapiapp.com",
-        port: "",
-        pathname: "/**",
+        protocol: "http",
+        hostname: "localhost",
+        port: "1337",
+        pathname: "/uploads/**",
       },
     ],
   },

@@ -8,7 +8,7 @@ export default function Dropdown({ menus }: any) {
       {menus.map((menu: any) => (
         <div className="flex items-center gap-px group " key={menu.id}>
           <Image
-            src={menu.logo.url}
+            src={menu.icon.url}
             width={36}
             height={36}
             alt="button logo"
@@ -18,7 +18,7 @@ export default function Dropdown({ menus }: any) {
             href={`${menu.href || "/"}`}
             className="text-gray-900 cursor-pointer font-medium w-full py-1 px-2 rounded-md transition-all duration-400 ease-in-out"
           >
-            {menu?.text}
+            {menu?.name}
           </Link>
         </div>
       ))}

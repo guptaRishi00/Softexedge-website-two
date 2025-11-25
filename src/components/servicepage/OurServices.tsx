@@ -33,13 +33,13 @@ export default function OurServices({ data }: any) {
 
       <p className="text-gray-400 text-center">{card?.description}</p>
 
-      <div className="rounded-lg w-full">
+      <div className="rounded-lg w-full bg-[#1A1A1A] overflow-hidden">
         <Image
           src={card?.image?.url}
           alt={card?.title}
           width={700}
           height={700}
-          className="object-cover w-full rounded-lg"
+          className="object-cover w-full"
         />
       </div>
 
@@ -64,7 +64,7 @@ export default function OurServices({ data }: any) {
 
   const DesktopCard = ({ card }: any) => (
     <div className="flex items-center justify-center gap-10">
-      <div className="relative rounded-lg w-auto">
+      <div className="relative rounded-lg w-auto bg-[#1A1A1A] overflow-hidden">
         <Image
           src={card?.image?.url}
           alt={card?.title}
@@ -96,7 +96,7 @@ export default function OurServices({ data }: any) {
         <LinkComp
           color={card?.button?.theme || "blue"}
           href={card?.button?.href || "/"}
-          className="flex items-center gap-3 text-white font-medium px-10 py-3 justify-center w-fit"
+          className="flex items-center gap-3 text-black font-medium px-10 py-3 justify-center w-fit"
         >
           {card?.button?.text}
         </LinkComp>

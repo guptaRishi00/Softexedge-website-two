@@ -18,24 +18,33 @@ export default async function AboutPage() {
 
     const blocks = page?.attributes?.blocks || page?.blocks || [];
 
-    const aboutBlock = blocks.find(
-      (block: any) => block.__component === "page.about"
+    const heroSectionData = blocks.find(
+      (block: any) => block.__component === "aboutpage.hero-section"
     );
 
-    if (!aboutBlock) {
-      return (
-        <div className="text-center py-20 text-xl">No About block found.</div>
-      );
-    }
+    const ourStoryData = blocks.find(
+      (block: any) => block.__component === "aboutpage.our-story"
+    );
 
-    // Extract nested component data
-    const heroSectionData = aboutBlock.herosection;
-    const ourStoryData = aboutBlock.ourStory;
-    const ourMissionData = aboutBlock.ourMission;
-    const whatWeDoData = aboutBlock.whatWeDo;
-    const whyChooseData = aboutBlock.whyChoose;
-    const ourTeamData = aboutBlock.ourTeam;
-    const reviewData = aboutBlock.review;
+    const ourMissionData = blocks.find(
+      (block: any) => block.__component === "aboutpage.our-mission"
+    );
+
+    const whatWeDoData = blocks.find(
+      (block: any) => block.__component === "aboutpage.what-we-do"
+    );
+
+    const whyChooseData = blocks.find(
+      (block: any) => block.__component === "aboutpage.why-choose"
+    );
+
+    const ourTeamData = blocks.find(
+      (block: any) => block.__component === "aboutpage.our-team"
+    );
+
+    const reviewData = blocks.find(
+      (block: any) => block.__component === "aboutpage.review"
+    );
 
     return (
       <main className="p-3 space-y-10">

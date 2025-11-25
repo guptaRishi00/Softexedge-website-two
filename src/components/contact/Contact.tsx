@@ -5,6 +5,7 @@ type Props = {};
 export default function Contact({}: Props) {
   return (
     <div className="w-full bg-black rounded-3xl py-8 px-4 sm:px-6 lg:py-20 lg:px-16 space-y-8">
+      <h1 className="text-white text-4xl text-center">Contact Form</h1>
       <div className="bg-[#121212] rounded-2xl py-8 px-4 sm:px-6 lg:py-20 lg:px-16">
         <form className="w-full flex flex-col gap-10 lg:gap-20">
           <div className="flex flex-col lg:flex-row items-center w-full gap-6 lg:gap-20">

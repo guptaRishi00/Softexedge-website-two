@@ -20,24 +20,30 @@ export default async function Careers({}: Props) {
 
     const blocks = page?.attributes?.blocks || page?.blocks || [];
 
-    const careerBlock = blocks.find(
-      (block: any) => block.__component === "page.careers"
+    // --- FIX START ---
+    // Map individual blocks instead of looking for one "page.careers" wrapper
+
+    const heroSectionData = blocks.find(
+      (block: any) => block.__component === "digital-marketing.hero-section"
     );
 
-    if (!careerBlock) {
-      return (
-        <div className="text-center py-20 text-xl">
-          No Services block found.
-        </div>
-      );
-    }
+    const whyWorkData = blocks.find(
+      (block: any) => block.__component === "careerpage.why-work"
+    );
 
-    // Extract section data
-    const heroSectionData = careerBlock.herosection;
-    const whyWorkData = careerBlock.whyWorkWithUs;
-    const ourValues = careerBlock.howWeWork;
-    const positionsData = careerBlock.positions;
-    const ourProcessData = careerBlock.ourProcess;
+    const ourValues = blocks.find(
+      (block: any) => block.__component === "careerpage.our-values"
+    );
+
+    const positionsData = blocks.find(
+      (block: any) => block.__component === "careerpage.position"
+    );
+
+    // Based on your JSON, the Application Process uses "videography.we-work"
+    const ourProcessData = blocks.find(
+      (block: any) => block.__component === "videography.we-work"
+    );
+    // --- FIX END ---
 
     return (
       <main className="p-3 space-y-10">
@@ -50,10 +56,10 @@ export default async function Careers({}: Props) {
       </main>
     );
   } catch (error) {
-    console.error("❌ Failed to load Services page:", error);
+    console.error("❌ Failed to load Careers page:", error);
     return (
       <div className="text-center py-20 text-xl text-red-600">
-        Failed to load Services page.
+        Failed to load Careers page.
       </div>
     );
   }

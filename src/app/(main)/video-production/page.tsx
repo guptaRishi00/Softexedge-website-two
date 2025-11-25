@@ -19,27 +19,45 @@ export default async function VideoProduction() {
 
     const blocks = page?.attributes?.blocks || page?.blocks || [];
 
-    const servicesBlock = blocks.find(
-      (block: any) => block.__component === "page.service"
+    // --- FIX START ---
+    // Instead of looking for a wrapper "page.service" block, we find specific
+    // components directly in the blocks array based on your JSON structure.
+
+    const heroSectionData = blocks.find(
+      (block: any) => block.__component === "digital-marketing.hero-section"
     );
 
-    if (!servicesBlock) {
-      return (
-        <div className="text-center py-20 text-xl">
-          No Services block found.
-        </div>
-      );
-    }
+    const whyChooseData = blocks.find(
+      (block: any) => block.__component === "videography.video-matters"
+    );
 
-    // Extract section data
-    const heroSectionData = servicesBlock.herosection;
-    const whyChooseData = servicesBlock.whyChoose;
-    const ourServicesData = servicesBlock.ourServices;
-    const ourCaseData = servicesBlock.ourCase;
-    const ourProcessData = servicesBlock.ourProcess;
-    const clientReviewData = servicesBlock.clientReview;
-    const contactUsData = servicesBlock.contactUs;
-    const videoWorksData = servicesBlock.videoWorks;
+    const ourServicesData = blocks.find(
+      (block: any) => block.__component === "shared.our-services"
+    );
+
+    const videoWorksData = blocks.find(
+      (block: any) => block.__component === "videography.video-works"
+    );
+
+    // Mapping "videography.we-work" to the OurProcess component
+    const ourProcessData = blocks.find(
+      (block: any) => block.__component === "videography.we-work"
+    );
+
+    const clientReviewData = blocks.find(
+      (block: any) => block.__component === "aboutpage.review"
+    );
+
+    // These components were not in your provided JSON, but I'm keeping the logic
+    // to look for them in case they are added later or named differently.
+    const ourCaseData = blocks.find(
+      (block: any) => block.__component === "homepage.our-case"
+    );
+
+    const contactUsData = blocks.find(
+      (block: any) => block.__component === "shared.contact-us"
+    );
+    // --- FIX END ---
 
     return (
       <main className="p-3 space-y-10">

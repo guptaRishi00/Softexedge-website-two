@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Button from "../Button";
 import Image from "next/image";
+import LinkComp from "../LinkComp";
 
 export default function OurCase({ data }: any) {
   const [activeTab, setActiveTab] = useState(0);
@@ -35,7 +36,7 @@ export default function OurCase({ data }: any) {
           </p>
         </div>
 
-        <div className="relative hidden lg:flex items-center gap-5 border-b-2 transition-all border-white/30 py-2">
+        <div className="relative hidden lg:flex items-center  gap-5 border-b-2 transition-all border-white/30 py-2">
           {data?.tabs?.map((tab: any, index: number) => (
             <button
               key={index}
@@ -108,12 +109,13 @@ export default function OurCase({ data }: any) {
                       {card.title}
                     </h1>
 
-                    <Button
+                    <LinkComp
+                      href={card?.button?.href || "/"}
                       color={card?.button?.theme || "blue"}
-                      className="text-xs px-5"
+                      className="text-xs px-5 "
                     >
                       {card?.button?.text}
-                    </Button>
+                    </LinkComp>
                   </div>
                   <div className="w-full h-auto p-2 overflow-hidden ">
                     {card?.image?.url && (

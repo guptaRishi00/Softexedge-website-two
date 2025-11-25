@@ -3,16 +3,24 @@
 import React from "react";
 import Image from "next/image";
 import LinkComp from "../LinkComp";
+import { getStrapiMedia } from "@/lib/utils"; // 1. Import utility
 
 export default function HeroSectionBrandStrategy({ data }: any) {
-  const letsTalkTheme = data?.letsTalk.theme;
+  const letsTalkTheme = data?.letsTalk?.theme;
+
+  // 2. Process the main hero image URL
+  const heroImageUrl = getStrapiMedia(data?.image?.url);
+
+  // 3. Process the 'Let's Talk' button image URL
+  const letsTalkImageUrl = getStrapiMedia(data?.letsTalk?.image?.url);
 
   return (
     <section className="w-full h-auto bg-white px-5 py-6 lg:pt-24 top-0 left-0 lg:px-18">
       <div className="w-full flex flex-col lg:flex-row items-start gap-10 lg:gap-2 ">
-        <div className="space-y-9 flex flex-col items-center lg:items-start justify-between text-center lg:text-start  h-full">
+        <div className="space-y-9 flex flex-col items-center lg:items-start justify-between text-center lg:text-start h-full">
           <p className="inline-block bg-[#0000001A] text-black text-sm px-5 py-2 rounded-full w-fit">
-            {data?.subtitle}
+            {data?.tag}{" "}
+            {/* Changed from subtitle to tag based on common schema */}
           </p>
 
           {/* Title */}
@@ -29,18 +37,21 @@ export default function HeroSectionBrandStrategy({ data }: any) {
             <LinkComp
               href={data?.letsTalk?.href || "/"}
               color={letsTalkTheme}
-              className="font-regular justify-center flex items-center lg:py-3 lg:px-5 px-5 py-2 gap-3 lg:text-lg"
+              className="font-regular justify-center flex items-center lg:py-3 lg:px-5 border border-gray-300 px-5 py-2 gap-3 lg:text-lg"
             >
               {data?.letsTalk?.text}
-              {data?.letsTalk?.images.map((img: any, index: number) => (
+
+              {/* --- FIX START: Handle single image object --- */}
+              {letsTalkImageUrl && (
                 <Image
-                  key={index}
-                  src={img?.url}
+                  src={letsTalkImageUrl}
                   width={60}
                   height={60}
-                  alt="button logo lg:w-26 lg:h-26"
+                  alt="button logo"
+                  className="w-10 h-10 object-contain"
                 />
-              ))}
+              )}
+              {/* --- FIX END --- */}
             </LinkComp>
 
             <LinkComp
@@ -55,14 +66,16 @@ export default function HeroSectionBrandStrategy({ data }: any) {
 
         {/* RIGHT SINGLE IMAGE */}
         <div className=" mx-auto h-full overflow-hidden lg:flex items-center justify-end relative">
-          <Image
-            src={data?.image?.url}
-            alt={data?.title || "About Hero Image"}
-            width={700}
-            height={700}
-            className="object-cover "
-            priority
-          />
+          {heroImageUrl && (
+            <Image
+              src={heroImageUrl}
+              alt={data?.title || "About Hero Image"}
+              width={700}
+              height={700}
+              className="object-cover"
+              priority
+            />
+          )}
         </div>
       </div>
     </section>

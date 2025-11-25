@@ -4,15 +4,37 @@ import qs from "qs";
 
 const globalQuery = qs.stringify({
   populate: {
-    header: {
-      populate: {
-        logo: { fields: ["url", "name"] },
-        secondLogo: { fields: ["url", "name"] },
-        links: true,
-        cta: true,
-        serviceDropdown: {
+    blocks: {
+      on: {
+        "layout.header": {
           populate: {
             logo: { fields: ["url", "name"] },
+            secondLogo: { fields: ["url", "name"] },
+            links: true,
+            cta: true,
+            serviceDropdown: {
+              populate: {
+                icon: { fields: ["url", "name"] },
+              },
+            },
+          },
+        },
+        "layout.footer": {
+          populate: {
+            services: true,
+            cases: true,
+            aboutUs: true,
+            logo: {
+              fields: ["url", "name"],
+            },
+
+            socials: {
+              populate: {
+                icon: {
+                  fields: ["url", "name"],
+                },
+              },
+            },
           },
         },
       },
@@ -33,18 +55,18 @@ const homepageQuery = () =>
     populate: {
       blocks: {
         on: {
-          "shared-components.hero-section": {
+          "homepage.hero-section": {
             populate: {
               image: { fields: ["url", "name"] },
               titleImage: { fields: ["url", "name"] },
               letsTalk: {
-                populate: { images: { fields: ["url", "name"] } },
+                populate: { image: { fields: ["url", "name"] } },
               },
               viewOurWork: true,
-              bookCall: { populate: { logo: { fields: ["url", "name"] } } },
+              bookCall: { populate: { image: { fields: ["url", "name"] } } },
             },
           },
-          "shared-components.brands": {
+          "homepage.brands": {
             populate: { image: { fields: ["url", "name"] } },
           },
           "homepage.what-we-do": {
@@ -59,10 +81,9 @@ const homepageQuery = () =>
           },
           "homepage.our-project": {
             populate: {
-              card: {
+              cards: {
                 populate: {
-                  image: { fields: ["url", "name"] },
-                  button: true,
+                  video: { fields: ["url", "name"] },
                 },
               },
             },
@@ -89,9 +110,6 @@ const homepageQuery = () =>
           },
           "homepage.contact": {
             populate: {
-              cards: {
-                populate: { profile: { fields: ["url", "name"] } },
-              },
               leftCard: {
                 populate: { image: { fields: ["url", "name"] } },
               },
@@ -125,70 +143,91 @@ function buildPageQuery(slug: string) {
       populate: {
         blocks: {
           on: {
-            "page.about": {
+            "aboutpage.hero-section": {
               populate: {
-                herosection: {
-                  populate: {
-                    image: { fields: ["url", "name"] },
-                    letsTalk: {
-                      populate: { images: { fields: ["url", "name"] } },
-                    },
-                    viewOurWork: true,
-                  },
+                image: {
+                  fields: ["url", "name"],
                 },
-                ourStory: {
+                letsTalk: {
                   populate: {
-                    button: true,
-                    image: { fields: ["url", "name"] },
-                  },
-                },
-                ourMission: {
-                  populate: {
-                    cards: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                        button: true,
-                      },
+                    image: {
+                      fields: ["url", "name"],
                     },
                   },
                 },
-                whatWeDo: {
+                viewWork: true,
+              },
+            },
+            "aboutpage.our-story": {
+              populate: {
+                button: true,
+                image: {
+                  fields: ["url", "name"],
+                },
+              },
+            },
+            "aboutpage.our-mission": {
+              populate: {
+                cards: {
                   populate: {
-                    cards: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                        button: true,
-                      },
+                    image: {
+                      fields: ["url", "name"],
                     },
                   },
                 },
-                whyChoose: {
+              },
+            },
+            "aboutpage.what-we-do": {
+              populate: {
+                cards: {
                   populate: {
-                    image: { fields: ["url", "name"] },
-                    lists: {
-                      populate: { icon: { fields: ["url", "name"] } },
+                    image: {
+                      fields: ["url", "name"],
                     },
                     button: true,
                   },
                 },
-                ourTeam: {
+              },
+            },
+            "aboutpage.why-choose": {
+              populate: {
+                image: {
+                  fields: ["url", "name"],
+                },
+                lists: {
                   populate: {
-                    images: { fields: ["url", "name"] },
-                    button: true,
+                    icon: {
+                      fields: ["url", "name"],
+                    },
                   },
                 },
-                review: {
+                button: true,
+              },
+            },
+            "aboutpage.our-team": {
+              populate: {
+                images: {
+                  fields: ["url", "name"],
+                },
+                button: true,
+              },
+            },
+            "aboutpage.review": {
+              populate: {
+                cards: {
                   populate: {
-                    cards: {
-                      populate: {
-                        icon: { fields: ["url", "name"] },
-                        profile: { fields: ["url", "name"] },
-                      },
+                    icon: {
+                      fields: ["url", "name"],
                     },
-                    brands: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                      },
+                    profile: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+                brands: {
+                  populate: {
+                    image: {
+                      fields: ["url", "name"],
                     },
                   },
                 },
@@ -203,98 +242,109 @@ function buildPageQuery(slug: string) {
       populate: {
         blocks: {
           on: {
-            "page.service": {
+            "digital-marketing.hero-section": {
               populate: {
-                herosection: {
+                letsTalk: {
                   populate: {
-                    image: { fields: ["url", "name"] },
-                    letsTalk: {
-                      populate: { images: { fields: ["url", "name"] } },
-                    },
-                    viewOurWork: true,
-                  },
-                },
-                whyChoose: {
-                  populate: {
-                    image: { fields: ["url", "name"] },
-                    cards: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-
-                        button: true,
-                      },
+                    image: {
+                      fields: ["url", "name"],
                     },
                   },
                 },
-                ourServices: {
+                viewWork: true,
+                image: {
+                  fields: ["url", "name"],
+                },
+              },
+            },
+            "digital-marketing.why-choose": {
+              populate: {
+                cards: {
                   populate: {
-                    cards: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+                image: {
+                  fields: ["url", "name"],
+                },
+              },
+            },
+            "shared.our-services": {
+              populate: {
+                cards: {
+                  populate: {
+                    image: {
+                      fields: ["url", "name"],
+                    },
+                    lists: {
                       populate: {
-                        image: { fields: ["url", "name"] },
-                        button: true,
-                        lists: {
-                          populate: {
-                            icon: { fields: ["url", "name"] },
-                          },
+                        icon: {
+                          fields: ["url", "name"],
                         },
                       },
                     },
+                    button: true,
                   },
                 },
-
-                ourCase: {
+              },
+            },
+            "homepage.our-case": {
+              populate: {
+                tabs: true,
+                cards: {
                   populate: {
-                    tabs: true,
-
-                    cards: {
-                      populate: {
-                        button: true,
-                        image: { fields: ["url", "name"] },
-                        challenge: true,
-                        solution: true,
-                        result: { populate: { lists: true } },
-                      },
+                    button: true,
+                    image: {
+                      fields: ["url", "name"],
                     },
-                  },
-                },
-                ourProcess: {
-                  populate: {
-                    tags: {
-                      populate: { icon: { fields: ["url", "name"] } },
-                    },
-                    cards: {
+                    challenge: true,
+                    solution: true,
+                    result: {
                       populate: {
-                        image: { fields: ["url", "name"] },
                         lists: true,
                       },
                     },
                   },
                 },
-                clientReview: {
+              },
+            },
+            "digital-marketing.our-process": {
+              populate: {
+                tags: {
                   populate: {
-                    reviews: {
-                      populate: {
-                        icon: { fields: ["url", "name"] },
-                        profile: { fields: ["url", "name"] },
-                      },
-                    },
-                    brands: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                      },
+                    icon: {
+                      fields: ["url", "name"],
                     },
                   },
                 },
-                contactUs: {
+                cards: {
                   populate: {
-                    bg: { fields: ["url", "name"] },
-                    letsTalk: {
-                      populate: {
-                        images: { fields: ["url", "name"] },
-                        logo: true,
-                      },
+                    image: {
+                      fields: ["url", "name"],
                     },
-                    viewWork: true,
+                  },
+                },
+              },
+            },
+            "aboutpage.review": {
+              populate: {
+                cards: {
+                  populate: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                    profile: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+                brands: {
+                  populate: {
+                    image: {
+                      fields: ["url", "name"],
+                    },
                   },
                 },
               },
@@ -308,91 +358,75 @@ function buildPageQuery(slug: string) {
       populate: {
         blocks: {
           on: {
-            "page.service": {
+            "digital-marketing.hero-section": {
               populate: {
-                herosection: {
+                letsTalk: {
                   populate: {
-                    image: { fields: ["url", "name"] },
-                    letsTalk: {
-                      populate: { images: { fields: ["url", "name"] } },
+                    image: {
+                      fields: ["url", "name"],
                     },
-                    viewOurWork: true,
                   },
                 },
-                whyChoose: {
-                  populate: {
-                    image: { fields: ["url", "name"] },
-                  },
+                viewWork: true,
+                image: {
+                  fields: ["url", "name"],
                 },
-                ourServices: {
+              },
+            },
+            "brand-strategy.branding-matters": {
+              populate: {
+                image: {
+                  fields: ["url", "name"],
+                },
+              },
+            },
+            "shared.our-services": {
+              populate: {
+                cards: {
                   populate: {
-                    cards: {
+                    image: {
+                      fields: ["url", "name"],
+                    },
+                    lists: {
                       populate: {
-                        image: { fields: ["url", "name"] },
-                        button: true,
-                        lists: {
-                          populate: {
-                            icon: { fields: ["url", "name"] },
-                          },
+                        icon: {
+                          fields: ["url", "name"],
                         },
                       },
                     },
+                    button: true,
                   },
                 },
-
-                ourCase: {
+              },
+            },
+            "digital-marketing.our-process": {
+              populate: {
+                cards: {
                   populate: {
-                    tabs: true,
-
-                    cards: {
-                      populate: {
-                        button: true,
-                        image: { fields: ["url", "name"] },
-                        challenge: true,
-                        solution: true,
-                        result: { populate: { lists: true } },
-                      },
+                    image: {
+                      fields: ["url", "name"],
                     },
                   },
                 },
-                ourProcess: {
+              },
+            },
+            "aboutpage.review": {
+              populate: {
+                cards: {
                   populate: {
-                    tags: {
-                      populate: { icon: { fields: ["url", "name"] } },
+                    icon: {
+                      fields: ["url", "name"],
                     },
-                    cards: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                        lists: true,
-                      },
+                    profile: {
+                      fields: ["url", "name"],
                     },
                   },
                 },
-                clientReview: {
+                brands: {
                   populate: {
-                    reviews: {
-                      populate: {
-                        icon: { fields: ["url", "name"] },
-                        profile: { fields: ["url", "name"] },
-                      },
+                    image: {
+                      fields: ["url", "name"],
                     },
-                    brands: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                      },
-                    },
-                  },
-                },
-                contactUs: {
-                  populate: {
-                    bg: { fields: ["url", "name"] },
-                    letsTalk: {
-                      populate: {
-                        images: { fields: ["url", "name"] },
-                        logo: true,
-                      },
-                    },
-                    viewWork: true,
                   },
                 },
               },
@@ -406,97 +440,63 @@ function buildPageQuery(slug: string) {
       populate: {
         blocks: {
           on: {
-            "page.service": {
+            "digital-marketing.hero-section": {
               populate: {
-                herosection: {
+                letsTalk: {
                   populate: {
                     image: { fields: ["url", "name"] },
-                    letsTalk: {
-                      populate: { images: { fields: ["url", "name"] } },
-                    },
-                    viewOurWork: true,
                   },
                 },
-                whyChoose: {
+                viewWork: true,
+                image: { fields: ["url", "name"] },
+              },
+            },
+            "videography.video-matters": {
+              populate: {
+                image: { fields: ["url", "name"] },
+                lists: true,
+              },
+            },
+            "shared.our-services": {
+              populate: {
+                cards: {
                   populate: {
                     image: { fields: ["url", "name"] },
-                    lists: true,
-                  },
-                },
-                videoWorks: {
-                  populate: {
-                    cards: true,
-                  },
-                },
-                ourServices: {
-                  populate: {
-                    cards: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                        button: true,
-                        lists: {
-                          populate: {
-                            icon: { fields: ["url", "name"] },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-
-                ourCase: {
-                  populate: {
-                    tabs: true,
-
-                    cards: {
-                      populate: {
-                        button: true,
-                        image: { fields: ["url", "name"] },
-                        challenge: true,
-                        solution: true,
-                        result: { populate: { lists: true } },
-                      },
-                    },
-                  },
-                },
-                ourProcess: {
-                  populate: {
-                    tags: {
-                      populate: { icon: { fields: ["url", "name"] } },
-                    },
-                    cards: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                        lists: true,
-                      },
-                    },
-                  },
-                },
-                clientReview: {
-                  populate: {
-                    reviews: {
+                    lists: {
                       populate: {
                         icon: { fields: ["url", "name"] },
-                        profile: { fields: ["url", "name"] },
                       },
                     },
-                    brands: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                      },
-                    },
+                    button: true,
                   },
                 },
-                contactUs: {
+              },
+            },
+            "videography.video-works": {
+              populate: {
+                cards: true,
+              },
+            }, // <--- Fixed: Removed extra closing brace here
+            "videography.we-work": {
+              populate: {
+                cards: {
                   populate: {
-                    bg: { fields: ["url", "name"] },
-                    letsTalk: {
-                      populate: {
-                        images: { fields: ["url", "name"] },
-                        logo: true,
-                      },
-                    },
-                    viewWork: true,
+                    image: { fields: ["url", "name"] },
+                  },
+                },
+              },
+            },
+            "aboutpage.review": {
+              populate: {
+                cards: {
+                  populate: {
+                    icon: { fields: ["url", "name"] },
+                    profile: { fields: ["url", "name"] },
+                  },
+                },
+                brands: {
+                  populate: {
+                    image: { fields: ["url", "name"] },
                   },
                 },
               },
@@ -510,97 +510,47 @@ function buildPageQuery(slug: string) {
       populate: {
         blocks: {
           on: {
-            "page.service": {
+            "digital-marketing.hero-section": {
               populate: {
-                herosection: {
+                letsTalk: {
                   populate: {
                     image: { fields: ["url", "name"] },
-                    letsTalk: {
-                      populate: { images: { fields: ["url", "name"] } },
+                  },
+                },
+                viewWork: true,
+                image: { fields: ["url", "name"] },
+              },
+            },
+            "web.our-development": {
+              populate: {
+                image: { fields: ["url", "name"] },
+                lists: true,
+              },
+            },
+            "shared.our-services": {
+              populate: {
+                cards: {
+                  populate: {
+                    image: {
+                      fields: ["url", "name"],
                     },
-                    viewOurWork: true,
-                  },
-                },
-                whyChoose: {
-                  populate: {
-                    image: { fields: ["url", "name"] },
-                    lists: true,
-                  },
-                },
-                videoWorks: {
-                  populate: {
-                    cards: true,
-                  },
-                },
-                ourServices: {
-                  populate: {
-                    cards: {
+                    lists: {
                       populate: {
-                        image: { fields: ["url", "name"] },
-                        button: true,
-                        lists: {
-                          populate: {
-                            icon: { fields: ["url", "name"] },
-                          },
+                        icon: {
+                          fields: ["url", "name"],
                         },
                       },
                     },
+                    button: true,
                   },
                 },
-
-                ourCase: {
+              },
+            },
+            "videography.we-work": {
+              populate: {
+                cards: {
                   populate: {
-                    tabs: true,
-
-                    cards: {
-                      populate: {
-                        button: true,
-                        image: { fields: ["url", "name"] },
-                        challenge: true,
-                        solution: true,
-                        result: { populate: { lists: true } },
-                      },
-                    },
-                  },
-                },
-                ourProcess: {
-                  populate: {
-                    tags: {
-                      populate: { icon: { fields: ["url", "name"] } },
-                    },
-                    cards: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                        lists: true,
-                      },
-                    },
-                  },
-                },
-                clientReview: {
-                  populate: {
-                    reviews: {
-                      populate: {
-                        icon: { fields: ["url", "name"] },
-                        profile: { fields: ["url", "name"] },
-                      },
-                    },
-                    brands: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                      },
-                    },
-                  },
-                },
-                contactUs: {
-                  populate: {
-                    bg: { fields: ["url", "name"] },
-                    letsTalk: {
-                      populate: {
-                        images: { fields: ["url", "name"] },
-                        logo: true,
-                      },
-                    },
-                    viewWork: true,
+                    image: { fields: ["url", "name"] },
                   },
                 },
               },
@@ -614,24 +564,30 @@ function buildPageQuery(slug: string) {
       populate: {
         blocks: {
           on: {
-            "page.contact": {
+            "digital-marketing.hero-section": {
               populate: {
-                herosection: {
+                letsTalk: {
                   populate: {
                     image: { fields: ["url", "name"] },
                   },
                 },
-                contact: {
-                  populate: {
-                    image: { fields: ["url", "name"] },
-                  },
+                viewWork: true,
+                image: { fields: ["url", "name"] },
+              },
+            },
+            "contactpage.contact": {
+              populate: {
+                image: {
+                  fields: ["url", "name"],
                 },
-                contactInfo: {
+              },
+            },
+            "contactpage.contact-info": {
+              populate: {
+                cards: {
                   populate: {
-                    cards: {
-                      populate: {
-                        icon: { fields: ["url", "name"] },
-                      },
+                    icon: {
+                      fields: ["url", "name"],
                     },
                   },
                 },
@@ -646,51 +602,103 @@ function buildPageQuery(slug: string) {
       populate: {
         blocks: {
           on: {
-            "page.careers": {
+            "digital-marketing.hero-section": {
               populate: {
-                herosection: {
+                letsTalk: {
                   populate: {
+                    image: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+                viewWork: true,
+                image: {
+                  fields: ["url", "name"],
+                },
+              },
+            },
+            "careerpage.why-work": {
+              populate: {
+                image: {
+                  fields: ["url", "name"],
+                },
+                lists: {
+                  populate: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+            "careerpage.our-values": {
+              populate: {
+                cards: {
+                  populate: {
+                    image: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+            "careerpage.position": {
+              populate: {
+                jobs: {
+                  populate: {
+                    tags: true,
+                    button: true,
+                  },
+                },
+              },
+            },
+            "videography.we-work": {
+              populate: {
+                cards: {
+                  populate: {
+                    image: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  } else if (slug === "portfolio") {
+    populateOptions = {
+      populate: {
+        blocks: {
+          on: {
+            "digital-marketing.hero-section": {
+              populate: {
+                // ... your hero populate logic
+                letsTalk: { populate: { image: { fields: ["url", "name"] } } },
+                viewWork: true,
+                image: { fields: ["url", "name"] },
+              },
+            },
+
+            "portfoliopage.portfolio-work": {
+              populate: {
+                categories: true,
+                cards: {
+                  populate: {
+                    lists: true,
+                    button: true,
+
                     image: { fields: ["url", "name"] },
                   },
                 },
-                whyWorkWithUs: {
-                  populate: {
-                    image: { fields: ["url", "name"] },
-                    lists: {
-                      populate: {
-                        icon: { fields: ["url", "name"] },
-                      },
-                    },
-                  },
-                },
-                howWeWork: {
-                  populate: {
-                    cards: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                      },
-                    },
-                  },
-                },
-                positions: {
-                  populate: {
-                    jobs: {
-                      populate: {
-                        tags: true,
-                        button: true,
-                      },
-                    },
-                  },
-                },
-                ourProcess: {
-                  populate: {
-                    cards: {
-                      populate: {
-                        image: { fields: ["url", "name"] },
-                      },
-                    },
-                  },
-                },
+              },
+            },
+
+            // Don't forget to fix this one too if it's in the same category!
+            "portfoliopage.clients": {
+              populate: {
+                images: { fields: ["url", "name"] },
               },
             },
           },

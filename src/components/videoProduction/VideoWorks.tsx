@@ -45,11 +45,11 @@ export default function VideoWorks({ data }: any) {
       <div className="w-full hidden lg:flex items-center gap-10 py-10">
         {data?.cards?.map((card: any, index: number) => (
           <div
-            key={card?.text || index} // Added a key
+            key={card?.id || index} // Added a key
             className="bg-[#121212] rounded-2xl w-full px-2 py-20 border border-[#FFFFFF1A] h-60 flex items-center justify-center"
           >
             <p className="font-medium text-4xl lg:text-2xl flex flex-col text-center items-center lg:gap-2 text-white">
-              {card?.text}
+              {card?.title}
             </p>
           </div>
         ))}

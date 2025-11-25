@@ -5,7 +5,7 @@ import Image from "next/image";
 import LinkComp from "../LinkComp";
 
 export default function HeroSectionAbout({ data }: any) {
-  const letsTalkTheme = data?.letsTalk.theme;
+  const letsTalkTheme = data?.letsTalk?.theme;
 
   return (
     <section className="w-full h-screen bg-white px-5 py-6 lg:pt-24 top-0 left-0 lg:px-19">
@@ -29,40 +29,44 @@ export default function HeroSectionAbout({ data }: any) {
             <LinkComp
               href={data?.letsTalk?.href || "/"}
               color={letsTalkTheme}
-              className="font-regular justify-center flex items-center lg:py-3 lg:px-5 px-5 py-2 gap-3 lg:text-lg"
+              className="font-regular justify-center flex items-center lg:py-3 lg:px-5 px-5 py-2 gap-3 lg:text-lg border border-gray-300"
             >
               {data?.letsTalk?.text}
-              {data?.letsTalk?.images.map((img: any, index: number) => (
+
+              {/* FIX: Check for singular 'image' object instead of mapping 'images' array */}
+              {data?.letsTalk?.image && (
                 <Image
-                  key={index}
-                  src={img?.url}
+                  src={data.letsTalk.image.url}
                   width={60}
                   height={60}
-                  alt="button logo lg:w-26 lg:h-26"
+                  alt="button logo"
                 />
-              ))}
+              )}
             </LinkComp>
 
             <LinkComp
-              href={data?.viewOurWork?.href || "#"}
-              color={data?.viewOurWork?.theme || "outline"}
+              /* FIX: Updated 'viewOurWork' to 'viewWork' to match your loader/JSON structure */
+              href={data?.viewWork?.href || "#"}
+              color={data?.viewWork?.theme || "outline"}
               className="flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-gray-300 hover:bg-gray-50 transition font-medium"
             >
-              {data?.viewOurWork?.text || "View Our Work"}
+              {data?.viewWork?.text || "View Our Work"}
             </LinkComp>
           </div>
         </div>
 
         {/* RIGHT SINGLE IMAGE */}
         <div className=" w-full mx-auto relative">
-          <Image
-            src={data?.image?.url}
-            alt={data?.title || "About Hero Image"}
-            width={800}
-            height={800}
-            className="object-cover w-full h-auto"
-            priority
-          />
+          {data?.image?.url && (
+            <Image
+              src={data.image.url}
+              alt={data?.title || "About Hero Image"}
+              width={800}
+              height={800}
+              className="object-cover w-full h-auto"
+              priority
+            />
+          )}
         </div>
       </div>
     </section>

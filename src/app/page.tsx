@@ -12,15 +12,17 @@ import { getGlobalData, getHomepageData } from "@/data/loader";
 export default async function Home() {
   const response = await getHomepageData();
 
-  const header = await getGlobalData();
+  const headerResponse = await getGlobalData();
 
-  const headerData = header.data.header;
+  const headerData = headerResponse.data.blocks.find(
+    (block: any) => block.__component === "layout.header"
+  );
 
   const heroSectionData = response.data.blocks.find(
-    (block: any) => block.__component === "shared-components.hero-section"
+    (block: any) => block.__component === "homepage.hero-section" // Was "shared-components.hero-section"
   );
   const brands = response.data.blocks.find(
-    (block: any) => block.__component === "shared-components.brands"
+    (block: any) => block.__component === "homepage.brands" // Was "shared-components.brands"
   );
 
   const whatWeDo = response.data.blocks.find(

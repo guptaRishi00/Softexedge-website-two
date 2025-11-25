@@ -16,28 +16,43 @@ export default async function BrandStrategy() {
       return <div className="text-center py-20 text-xl">Page not found</div>;
     }
 
+    // Access the blocks array directly
     const blocks = page?.attributes?.blocks || page?.blocks || [];
 
-    const servicesBlock = blocks.find(
-      (block: any) => block.__component === "page.service"
+    // --- FIXED LOGIC: Find components directly in the list ---
+
+    const heroSectionData = blocks.find(
+      (block: any) => block.__component === "digital-marketing.hero-section"
     );
 
-    if (!servicesBlock) {
-      return (
-        <div className="text-center py-20 text-xl">
-          No Services block found.
-        </div>
-      );
-    }
+    // Updated to match your API response for this page
+    const whyChooseData = blocks.find(
+      (block: any) => block.__component === "brand-strategy.branding-matters"
+    );
 
-    // Extract section data
-    const heroSectionData = servicesBlock.herosection;
-    const whyChooseData = servicesBlock.whyChoose;
-    const ourServicesData = servicesBlock.ourServices;
-    const ourCaseData = servicesBlock.ourCase;
-    const ourProcessData = servicesBlock.ourProcess;
-    const clientReviewData = servicesBlock.clientReview;
-    const contactUsData = servicesBlock.contactUs;
+    const ourServicesData = blocks.find(
+      (block: any) => block.__component === "shared.our-services"
+    );
+
+    const ourCaseData = blocks.find(
+      (block: any) => block.__component === "homepage.our-case"
+    );
+
+    const ourProcessData = blocks.find(
+      (block: any) => block.__component === "digital-marketing.our-process"
+    );
+
+    const clientReviewData = blocks.find(
+      (block: any) =>
+        block.__component === "aboutpage.review" ||
+        block.__component === "digital-marketing.client-review"
+    );
+
+    const contactUsData = blocks.find(
+      (block: any) =>
+        block.__component === "shared.contact-us" ||
+        block.__component === "digital-marketing.contact-us"
+    );
 
     return (
       <main className="p-3 space-y-10">
@@ -51,10 +66,10 @@ export default async function BrandStrategy() {
       </main>
     );
   } catch (error) {
-    console.error("❌ Failed to load Services page:", error);
+    console.error("❌ Failed to load Brand Strategy page:", error);
     return (
       <div className="text-center py-20 text-xl text-red-600">
-        Failed to load Services page.
+        Failed to load Brand Strategy page.
       </div>
     );
   }

@@ -1,19 +1,9 @@
 import Link, { LinkProps } from "next/link";
 import React from "react";
 
-type ButtonColor = "black" | "white" | "blue";
-
 interface LinkButtonProps
   extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">,
-    LinkProps {
-  color: ButtonColor;
-}
-
-const colorMap: Record<ButtonColor, string> = {
-  black: "bg-black text-white hover:bg-gray-800",
-  white: "bg-white text-[#111212] ",
-  blue: "bg-gradient-to-r from-[#3445E7] via-[#2F85EA] to-[#07D6F3] text-white",
-};
+    LinkProps {}
 
 const LinkComp: React.FC<LinkButtonProps> = ({
   color,
@@ -22,11 +12,10 @@ const LinkComp: React.FC<LinkButtonProps> = ({
   href,
   ...rest
 }) => {
-  const baseStyles = "rounded-full cursor-pointer shadow-sm";
+  const baseStyles =
+    "rounded-full cursor-pointer bg-white hover:bg-gradient-to-r hover:from-[#3445E7] hover:via-[#2F85EA] hover:to-[#07D6F3] text-black hover:text-white transition-all duration-300";
 
-  const colorStyles = colorMap[color];
-
-  const combinedStyles = `${baseStyles} ${colorStyles} ${className || ""}`;
+  const combinedStyles = `${baseStyles} ${className || ""}`;
 
   return (
     <Link href={href} className={combinedStyles} {...rest}>

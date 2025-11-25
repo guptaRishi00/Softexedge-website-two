@@ -62,16 +62,15 @@ export default function WhyChoose({ data }: any) {
       </div>
 
       <div className="w-full lg:w-1/2 mt-10 lg:mt-0 px-5 lg:px-0">
-        {data?.image?.map((img: any, index: number) => (
+        {data?.image?.url && (
           <Image
-            key={index}
-            src={img.url}
+            src={data.image.url}
             width={700}
             height={700}
-            alt="card image"
+            alt="card image" // Or use data.title as alt
             className="w-full h-full object-cover object-center mx-auto rounded-2xl"
           />
-        ))}
+        )}
       </div>
     </div>
   );

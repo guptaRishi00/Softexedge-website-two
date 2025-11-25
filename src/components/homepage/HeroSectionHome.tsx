@@ -68,20 +68,20 @@ export default function HeroSection({ data, headerData }: any) {
               className="font-regular flex items-center lg:py-3 lg:px-5 px-5 py-2 gap-3 lg:text-lg"
             >
               {data?.letsTalk?.text}
-              {data?.letsTalk?.images.map((img: any, index: number) => (
+              {data?.letsTalk?.image && (
                 <Image
-                  key={index}
-                  src={img?.url}
+                  src={data.letsTalk.image.url}
                   width={60}
                   height={60}
-                  alt="button logo lg:w-26 lg:h-26"
+                  alt="button logo"
+                  className="lg:w-10 lg:h-7" // Moved class from alt text to className prop
                 />
-              ))}
+              )}
             </LinkComp>
             <LinkComp
               href={data?.viewOurWork?.href}
               color={viewOurWorkTheme}
-              className="font-regular flex items-center lg:pt-3 lg:pb-2 lg:px-5 px-5 py-2 gap-3 lg:text-lg"
+              className="font-regular flex items-center lg:pt-3 lg:pb-2 lg:px-5 px-5 py-2 lg:py-8 gap-3 lg:text-lg"
             >
               {data?.viewOurWork?.text}
             </LinkComp>
@@ -92,19 +92,22 @@ export default function HeroSection({ data, headerData }: any) {
           <p className="text-white text-center lg:text-start lg:text-base text-xs lg:max-w-md">
             {data?.description}
           </p>
-          <Button
+          <LinkComp
+            href={data?.bookCall?.href}
             color={bookCallTheme}
             className="lg:flex items-center gap-2 pl-2 pr-3 py-2 hidden"
           >
-            <Image
-              src={data?.bookCall.logo.url}
-              width={30}
-              height={30}
-              alt="button logo"
-              className="inline-block bg-[#04034C] p-1 rounded-full"
-            />
+            {data?.bookCall?.image?.url && (
+              <Image
+                src={data.bookCall.image.url} // Changed .logo to .image
+                width={30}
+                height={30}
+                alt="button logo"
+                className="inline-block bg-[#04034C] p-1 rounded-full"
+              />
+            )}
             {data?.bookCall.text}
-          </Button>
+          </LinkComp>
         </div>
       </div>
     </div>

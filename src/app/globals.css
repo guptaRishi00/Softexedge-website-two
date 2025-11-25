@@ -3,3 +3,10 @@
 * {
   font-family: var(--font-itc-avg), sans-serif;
 }
+
+.card {
+  position: relative;
+  height: 200px;
+  width: 300px;
+  background-color: rgba(red, green, blue, alpha);
+}

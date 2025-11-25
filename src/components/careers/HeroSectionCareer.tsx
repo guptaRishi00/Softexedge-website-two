@@ -7,7 +7,7 @@ export default async function HeroSectionCareer({ data }: any) {
       <div className="w-full flex flex-col items-center justify-center gap-10 lg:gap-10 ">
         <div className="space-y-9 flex flex-col items-center lg:items-center justify-between text-center lg:text-start  h-full">
           <p className="inline-block bg-[#0000001A] text-black text-sm px-5 py-2 rounded-full w-fit">
-            {data?.subtitle}
+            {data?.tag}
           </p>
 
           {/* Title */}

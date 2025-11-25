@@ -101,7 +101,7 @@ export default function WhyChoose({ data }: any) {
           <LinkComp
             color={buttonTheme}
             href={button.href || "/"}
-            className="flex items-center gap-3  text-white font-medium px-10 py-3 justify-center lg:w-fit"
+            className="flex items-center gap-3  text-black font-medium px-10 py-3 justify-center lg:w-fit"
           >
             {data?.button.text}
           </LinkComp>

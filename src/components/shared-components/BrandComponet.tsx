@@ -7,8 +7,13 @@ type Props = {};
 export default async function BrandComponet({}: Props) {
   const response = await getHomepageData();
 
+  // FIX 1: Use the correct component name "homepage.brands"
   const brands = response.data.blocks.find(
-    (block: any) => block.__component === "shared-components.brands"
+    (block: any) => block.__component === "homepage.brands"
   );
+
+  // FIX 2: Return null if no brands block is found to prevent passing undefined
+  if (!brands) return null;
+
   return <Brands data={brands} />;
 }

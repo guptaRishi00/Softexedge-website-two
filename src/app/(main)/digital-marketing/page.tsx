@@ -18,26 +18,44 @@ export default async function DigitalMarketingPage() {
 
     const blocks = page?.attributes?.blocks || page?.blocks || [];
 
-    const servicesBlock = blocks.find(
-      (block: any) => block.__component === "page.service"
+    // --- FIXED LOGIC STARTS HERE ---
+    // Instead of looking for one "page.service" block, we look for specific
+    // components in the blocks array based on your API response.
+
+    const heroSectionData = blocks.find(
+      (block: any) => block.__component === "digital-marketing.hero-section"
     );
 
-    if (!servicesBlock) {
-      return (
-        <div className="text-center py-20 text-xl">
-          No Services block found.
-        </div>
-      );
-    }
+    const whyChooseData = blocks.find(
+      (block: any) => block.__component === "digital-marketing.why-choose"
+    );
 
-    // Extract section data
-    const heroSectionData = servicesBlock.herosection;
-    const whyChooseData = servicesBlock.whyChoose;
-    const ourServicesData = servicesBlock.ourServices;
-    const ourCaseData = servicesBlock.ourCase;
-    const ourProcessData = servicesBlock.ourProcess;
-    const clientReviewData = servicesBlock.clientReview;
-    const contactUsData = servicesBlock.contactUs;
+    const ourServicesData = blocks.find(
+      (block: any) => block.__component === "shared.our-services"
+    );
+
+    const ourCaseData = blocks.find(
+      (block: any) => block.__component === "homepage.our-case"
+    );
+
+    const ourProcessData = blocks.find(
+      (block: any) => block.__component === "digital-marketing.our-process"
+    );
+
+    // Note: These were not in your provided JSON snippet, so I used
+    // generic names. Verify these component names in your Strapi API if they don't show up.
+    const clientReviewData = blocks.find(
+      (block: any) =>
+        block.__component === "digital-marketing.client-review" ||
+        block.__component === "aboutpage.review"
+    );
+
+    const contactUsData = blocks.find(
+      (block: any) =>
+        block.__component === "digital-marketing.contact-us" ||
+        block.__component === "shared.contact-us"
+    );
+    // --- FIXED LOGIC ENDS HERE ---
 
     return (
       <main className="p-3 space-y-10">

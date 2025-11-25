@@ -5,6 +5,7 @@ import React from "react";
 import { IoIosArrowDown } from "react-icons/io";
 // No longer import Dropdown here
 import NavLinkItem from "./NavLinkItem"; // Import the new component
+import LinkComp from "../LinkComp";
 
 type link = {
   id: string;
@@ -59,12 +60,12 @@ export default function Header({ data, setDropdown }: any) {
           ))}
         </div>
 
-        <Link
+        <LinkComp
           href={`/${data.cta.href}`}
           className="text-black bg-white py-3 px-5 rounded-full text-sm font-medium"
         >
           {data.cta.name}
-        </Link>
+        </LinkComp>
       </div>
     </>
   );

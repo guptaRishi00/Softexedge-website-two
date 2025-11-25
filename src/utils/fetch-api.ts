@@ -1,3 +1,5 @@
+import { getStrapiURL } from "@/utils/get-strapi-url";
+
 type NextFetchRequestConfig = {
   revalidate?: number | false;
   tags?: string[];
@@ -34,7 +36,9 @@ export async function fetchAPI(url: string, options: FetchAPIOptions) {
     }
 
     if (contentType && contentType.includes("application/json")) {
-      return await response.json();
+      const data = await response.json();
+      // Wrap the response with the helper function to fix image URLs
+      return prependBaseUrl(data);
     } else {
       return { status: response.status, statusText: response.statusText };
     }
@@ -56,4 +60,38 @@ export async function fetchAPI(url: string, options: FetchAPIOptions) {
       `An unexpected error occurred while making ${method} request.`
     );
   }
+}
+
+// Recursive helper function to find and prepend the Strapi URL to image paths
+function prependBaseUrl(data: any): any {
+  if (!data) return data;
+
+  // If it's an array, map over it
+  if (Array.isArray(data)) {
+    return data.map(prependBaseUrl);
+  }
+
+  // If it's an object, iterate over keys
+  if (typeof data === "object") {
+    const newData: any = {};
+    Object.keys(data).forEach((key) => {
+      const value = data[key];
+
+      // Check if the key is 'url' and looks like a relative Strapi upload
+      if (
+        key === "url" &&
+        typeof value === "string" &&
+        value.startsWith("/uploads/")
+      ) {
+        newData[key] = `${getStrapiURL()}${value}`;
+      } else {
+        // Otherwise, recurse deeper
+        newData[key] = prependBaseUrl(value);
+      }
+    });
+    return newData;
+  }
+
+  // Return primitives (strings, numbers, booleans) as is
+  return data;
 }

@@ -13,10 +13,10 @@ export default async function ClientReviewComponent({}: Props) {
   }
   const blocks = page?.attributes?.blocks || page?.blocks || [];
 
-  const aboutBlock = blocks.find(
-    (block: any) => block.__component === "page.about"
+  // FIX: Find the specific review component directly
+  const reviewData = blocks.find(
+    (block: any) => block.__component === "aboutpage.review"
   );
 
-  const reviewData = aboutBlock.review;
   return <>{reviewData && <Review data={reviewData} />}</>;
 }

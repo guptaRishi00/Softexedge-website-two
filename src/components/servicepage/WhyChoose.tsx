@@ -1,34 +1,11 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
+import { getStrapiMedia } from "@/lib/utils"; // 1. Import this utility
 
-interface Media {
-  url: string;
-  alternativeText?: string;
-}
-
-interface Card {
-  id?: number;
-  tag?: string;
-  image?: Media;
-  description?: string;
-}
-
-interface WhyChooseData {
-  image?: Media;
-  tag?: string;
-  title?: string;
-  description?: string;
-  cards?: Card[];
-}
-
-interface WhyChooseProps {
-  data?: WhyChooseData;
-}
-
-export default function WhyChoose({ data }: WhyChooseProps) {
-  const imageUrl = data?.image?.url;
+export default function WhyChoose({ data }: any) {
+  // 2. Process the main image URL
+  const imageUrl = getStrapiMedia(data?.image?.url);
 
   return (
     <section className="bg-black h-auto text-white rounded-3xl px-5 py-10 lg:py-10 lg:px-10 my-10 space-y-10">
@@ -52,11 +29,12 @@ export default function WhyChoose({ data }: WhyChooseProps) {
             </p>
           )}
         </div>
+
         {/* Left Image */}
         {imageUrl && (
           <div className="relative w-full h-[300px] lg:h-[600px] rounded-2xl overflow-hidden">
             <Image
-              src={imageUrl}
+              src={imageUrl} // Used processed URL
               alt={data?.title || "Why Choose Us"}
               fill
               className="object-cover"
@@ -88,19 +66,20 @@ export default function WhyChoose({ data }: WhyChooseProps) {
 
       {/* CARDS SECTION */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-20">
-        {data?.cards?.map((card, index) => {
-          const cardImageUrl = card?.image?.url;
+        {data?.cards?.map((card: any, index: any) => {
+          // 3. Process the card image URL inside the map
+          const cardImageUrl = getStrapiMedia(card?.icon?.url);
 
           return (
             <div className="flex flex-col items-center gap-5" key={card.id}>
               <div className="w-full h-px bg-[#FFFFFF80] hidden lg:inline-block"></div>
               <div
                 key={card.id || index}
-                className="bg-[#191919] rounded-2xl border border-[#FFFFFF26] px-6 py-8 flex flex-col items-center text-center  transition"
+                className="bg-[#191919] rounded-2xl border border-[#FFFFFF26] px-6 py-8 flex flex-col items-center text-center transition"
               >
                 {cardImageUrl && (
                   <Image
-                    src={cardImageUrl}
+                    src={cardImageUrl} // Used processed URL
                     alt={card.tag || "Card Icon"}
                     width={40}
                     height={40}
