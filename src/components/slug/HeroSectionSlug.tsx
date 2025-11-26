@@ -1,10 +1,11 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 export const HeroSectionSlug: React.FC = () => {
   return (
     <section className="w-full bg-white min-h-screen px-4 py-12 md:px-8 lg:px-12 font-sans selection:bg-blue-100">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full mx-auto">
         {/* Top Tag */}
         <div className="mb-8">
           <span className="inline-block px-6 py-2 bg-gray-100 rounded-full text-sm font-semibold text-gray-700">
@@ -13,13 +14,13 @@ export const HeroSectionSlug: React.FC = () => {
         </div>
 
         {/* Hero Text Content */}
-        <div className="max-w-4xl mb-12">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.1] mb-6">
+        <div className="w-full mb-12">
+          <h1 className="text-4xl md:text-7xl font-medium text-gray-900 tracking-tight leading-none mb-6">
             Global SEO Services Built for Visibility,{" "}
             <br className="hidden md:block" />
             Built for Growth
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl">
+          <p className="text-lg md:text-xl text-black leading-relaxed w-full">
             We don't just rank you — we elevate your brand across borders. Our
             SEO strategies are crafted to drive traffic, convert leads, and
             deliver measurable results for brands worldwide.
@@ -33,17 +34,17 @@ export const HeroSectionSlug: React.FC = () => {
             {/* CTA Buttons Row */}
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               {/* Blue "Let's Talk" Button with Avatars */}
-              <button className="group relative bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-[2rem] pl-8 pr-2 py-2 flex items-center gap-4 h-16">
+              <button className="group relative bg-linear-to-r from-[#3445E7] via-[#2F85EA] to-[#07D6F3] transition-all duration-300 rounded-[2rem] pl-8 pr-2 py-2 flex items-center gap-4 h-16">
                 <span className="text-white font-medium text-lg ml-2">
                   let's talk
                 </span>
-                <div className="flex -space-x-3 bg-white/10 p-1.5 rounded-full backdrop-blur-sm">
+                <div className="flex -space-x-3 p-1.5 rounded-full backdrop-blur-sm">
                   {[1, 2, 3].map((i) => (
                     <img
                       key={i}
                       src={`https://i.pravatar.cc/100?img=${i + 10}`}
                       alt="Avatar"
-                      className="w-10 h-10 rounded-full border-2 border-blue-600 object-cover"
+                      className="w-10 h-10 rounded-full border-2 border-white object-cover"
                     />
                   ))}
                 </div>
@@ -81,22 +82,22 @@ export const HeroSectionSlug: React.FC = () => {
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 blur-3xl rounded-full pointer-events-none"></div>
 
               <div className="flex justify-between items-start">
-                <div>
+                <div className="">
                   <h3 className="text-6xl font-bold mb-2">100+</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed max-w-[200px]">
+                  <p className="text-gray-400 text-sm leading-relaxed max-w-[270px] mt-10">
                     Trusted by over 100+ top companies that rely on our services
                     to grow and succeed.
                   </p>
                 </div>
 
-                <button className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center hover:scale-110 transition-transform">
-                  <ArrowUpRight className="text-white w-6 h-6" />
+                <button className="w-18 h-18 rounded-full bg-linear-to-br from-blue-500 to-blue-700 flex items-center justify-center hover:scale-110 transition-transform">
+                  <ArrowUpRight className="text-white w-8 h-8" />
                 </button>
               </div>
             </div>
 
             {/* Chart Card */}
-            <div className="bg-gray-50 rounded-[2.5rem] p-8 h-[234px] flex flex-col justify-between border border-gray-100">
+            <div className="bg-gray-50 rounded-[2.5rem] p-8 h-auto flex flex-col justify-between gap-12 border border-gray-100">
               <div>
                 <h4 className="text-xl font-bold text-gray-900">
                   SEO That Moves the Metrics
@@ -106,28 +107,13 @@ export const HeroSectionSlug: React.FC = () => {
 
               {/* Bar Chart Visualization using Clip-Path */}
               <div className="flex items-end justify-between gap-2 h-24 mt-4 px-2">
-                {[30, 45, 60, 80, 70, 90, 100].map((height, index) => (
-                  <div
-                    key={index}
-                    className="w-full bg-gradient-to-t from-blue-600 to-blue-400 opacity-90"
-                    style={{
-                      height: `${height}%`,
-                      // Using clip-path to create rounded tops for the bars
-                      clipPath:
-                        "polygon(0% 100%, 0% 10px, 10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% 100%)",
-                      transition: "height 1s ease-out",
-                    }}
-                  >
-                    {/* Striped pattern overlay using CSS gradient */}
-                    <div
-                      className="w-full h-full opacity-30"
-                      style={{
-                        backgroundImage:
-                          "repeating-linear-gradient(45deg, transparent, transparent 2px, #fff 2px, #fff 4px)",
-                      }}
-                    />
-                  </div>
-                ))}
+                <Image
+                  src="/graph.svg"
+                  alt="Bar Chart"
+                  width={150}
+                  height={100}
+                  className="w-full h-auto"
+                />
               </div>
             </div>
           </div>
