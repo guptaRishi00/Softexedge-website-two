@@ -19,8 +19,6 @@ export default async function BrandStrategy() {
     // Access the blocks array directly
     const blocks = page?.attributes?.blocks || page?.blocks || [];
 
-    // --- FIXED LOGIC: Find components directly in the list ---
-
     const heroSectionData = blocks.find(
       (block: any) => block.__component === "digital-marketing.hero-section"
     );
