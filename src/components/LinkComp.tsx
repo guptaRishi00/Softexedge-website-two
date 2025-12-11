@@ -6,14 +6,13 @@ interface LinkButtonProps
     LinkProps {}
 
 const LinkComp: React.FC<LinkButtonProps> = ({
-  color,
   children,
   className,
   href,
   ...rest
 }) => {
   const baseStyles =
-    "rounded-full cursor-pointer bg-white hover:bg-gradient-to-r hover:from-[#3445E7] hover:via-[#2F85EA] hover:to-[#07D6F3] text-black hover:text-white transition-all duration-300";
+    "rounded-full cursor-pointer hover:bg-gradient-to-r hover:from-[#3445E7] hover:via-[#2F85EA] hover:to-[#07D6F3] text-black hover:text-white transition-all duration-300";
 
   const combinedStyles = `${baseStyles} ${className || ""}`;
 

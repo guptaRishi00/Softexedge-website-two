@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { getGlobalData } from "@/data/loader";
+import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Softexedge",
@@ -84,12 +86,20 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const response = await getGlobalData();
+
+  const footerData = response.data.blocks.find(
+    (block: any) => block.__component === "layout.footer"
+  );
   return (
     <html lang="en">
       <body
         className={`${itcAvg.variable} ${itcAvgCondensed.variable} antialiased`}
       >
         {children}
+        <div className="p-3">
+          <Footer data={footerData} />
+        </div>
       </body>
     </html>
   );

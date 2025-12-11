@@ -4,6 +4,7 @@ import Contact from "@/components/homepage/Contact";
 import HeroSection from "@/components/homepage/HeroSectionHome";
 import OurCase from "@/components/homepage/OurCase";
 import Project from "@/components/homepage/Project";
+import Recognition from "@/components/homepage/Recognition";
 import WhatWeDo from "@/components/homepage/WhatWeDo";
 import WhyChoose from "@/components/homepage/WhyChoose";
 
@@ -45,6 +46,9 @@ export default async function Home() {
   const about = response.data.blocks.find(
     (block: any) => block.__component === "homepage.about"
   );
+  const recognition = response.data.blocks.find(
+    (block: any) => block.__component === "homepage.recognition"
+  );
 
   return (
     <div className="p-3 space-y-10">
@@ -55,6 +59,7 @@ export default async function Home() {
       <Project data={projects} />
       <OurCase data={ourCase} />
       <WhyChoose data={whyChoose} />
+      <Recognition data={recognition} />
       <Contact data={contact} />
     </div>
   );

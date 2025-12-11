@@ -65,7 +65,7 @@ export default function OurStory({ data }: any) {
           <LinkComp
             color={buttonTheme}
             href={button.href || "/"}
-            className="flex items-center gap-3  text-black font-medium px-10 py-3 justify-center lg:w-fit"
+            className="flex items-center gap-3 bg-white text-black font-medium px-10 py-3 justify-center lg:w-fit"
           >
             {button.text}
           </LinkComp>

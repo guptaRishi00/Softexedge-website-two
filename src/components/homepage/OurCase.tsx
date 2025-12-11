@@ -55,9 +55,13 @@ export default function OurCase({ data }: any) {
       <div className="bg-[#121212] rounded-2xl px-5 py-8 hidden lg:flex flex-col gap-8">
         <div className="flex items-center justify-between">
           <h1 className="text-white text-2xl font-medium">{cards.title}</h1>
-          <Button color={theme} className="px-5">
+          <LinkComp
+            href={cards?.button?.href || "/"}
+            color={theme}
+            className="px-5 pb-2 pt-3 bg-white"
+          >
             {cards?.button?.text}
-          </Button>
+          </LinkComp>
         </div>
         <div className="w-full lg:h-[330px] p-2 overflow-hidden rounded-sm">
           {cards?.image?.url && (

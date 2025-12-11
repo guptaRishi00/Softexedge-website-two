@@ -21,52 +21,47 @@ export default memo(function TextSlider({
     currentIndex === texts.length - 1 ? 0 : currentIndex + 1;
 
   return (
-    <div className="relative h-screen  flex flex-col gap-10 justify-center overflow-hidden">
-      {/* Previous Text (faded out) */}
+    <div className="relative h-screen w-full flex flex-col justify-center overflow-hidden">
+      {/* Previous Text (Faded Above) */}
       <div
-        key={prevTextIndex}
-        className={`absolute text-5xl font-bold transition-all duration-500 ease-in-out
-                    ${
-                      currentIndex === prevTextIndex + 1 ||
-                      (prevTextIndex === texts.length - 1 && currentIndex === 0)
-                        ? "opacity-0 -translate-y-full"
-                        : "opacity-50 -translate-y-full" // Changed from -translate-y-1/2
-                    }
-                    `}
-        style={{
-          color: "rgb(60, 60, 60)",
-        }}
+        key={`prev-${prevTextIndex}`}
+        className={`absolute top-1/2 left-0 w-full transform transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]
+          ${
+            currentIndex === prevTextIndex + 1 ||
+            (prevTextIndex === texts.length - 1 && currentIndex === 0)
+              ? "opacity-0 -translate-y-[150%]" // Exit animation
+              : "opacity-40 -translate-y-[120%]" // Resting position
+          }`}
       >
-        {texts[prevTextIndex]}
+        <p className="text-3xl lg:text-5xl font-medium text-neutral-600 text-left">
+          {texts[prevTextIndex]}
+        </p>
       </div>
 
-      {/* Current Text */}
+      {/* Current Text (Active Center) */}
       <div
-        key={currentIndex}
-        className={`absolute text-5xl font-bold transition-all duration-500 ease-in-out ${"opacity-100 translate-y-0"}`}
-        style={{
-          color: "white",
-        }}
+        key={`curr-${currentIndex}`}
+        className="absolute top-1/2 left-0 w-full transform -translate-y-1/2 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] z-10"
       >
-        {texts[currentIndex]}
+        <p className="text-4xl lg:text-6xl font-medium text-white text-left leading-[1.1]">
+          {texts[currentIndex]}
+        </p>
       </div>
 
-      {/* Next Text (faded out) */}
+      {/* Next Text (Faded Below) */}
       <div
-        key={nextTextIndex}
-        className={`absolute text-5xl font-bold transition-all duration-500 ease-in-out
-                    ${
-                      currentIndex === nextTextIndex - 1 ||
-                      (nextTextIndex === 0 && currentIndex === texts.length - 1)
-                        ? "opacity-0 translate-y-full"
-                        : "opacity-50 translate-y-full" // Changed from translate-y-1/2
-                    }
-                    `}
-        style={{
-          color: "rgba(255, 255, 255, 0.2)",
-        }}
+        key={`next-${nextTextIndex}`}
+        className={`absolute top-1/2 left-0 w-full transform transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]
+          ${
+            currentIndex === nextTextIndex - 1 ||
+            (nextTextIndex === 0 && currentIndex === texts.length - 1)
+              ? "opacity-0 translate-y-[150%]" // Exit animation
+              : "opacity-40 translate-y-[120%]" // Resting position
+          }`}
       >
-        {texts[nextTextIndex]}
+        <p className="text-3xl lg:text-5xl font-medium text-neutral-600 text-left">
+          {texts[nextTextIndex]}
+        </p>
       </div>
     </div>
   );

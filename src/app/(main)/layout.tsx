@@ -31,9 +31,6 @@ export default async function RootLayout({
         <PageHeader data={headerData} />
       </div>
       {children}
-      <div className="p-3">
-        <Footer data={footerData} />
-      </div>
     </>
   );
 }

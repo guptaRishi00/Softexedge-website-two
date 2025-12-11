@@ -1,7 +1,7 @@
-"use client"; // Required for useState
+"use client";
 
 import Image from "next/image";
-import React, { useState } from "react"; // Import useState
+import React, { useState } from "react";
 import { HiOutlineArrowSmUp } from "react-icons/hi";
 
 export default function WhyChoose({ data }: any) {
@@ -33,28 +33,40 @@ export default function WhyChoose({ data }: any) {
                 className="border-b border-white/20 last:border-b-0"
               >
                 <div
-                  className="flex items-center justify-between py-5 cursor-pointer"
+                  className="flex items-center justify-between py-5 cursor-pointer group"
                   onClick={() => handleClick(index)}
                 >
-                  <p className="text-white font-medium text-xl lg:text-2xl pr-4">
+                  <p className="text-white font-medium text-xl lg:text-2xl pr-4 transition-colors group-hover:text-gray-300">
                     {faq.title}
                   </p>
                   <span
-                    className={`transform transition-transform duration-300 border border-white p-3 rounded-full ${
-                      isOpen ? "bg-white text-black" : "rotate-180 text-white"
+                    className={`transform transition-all duration-500 border border-white p-3 rounded-full ${
+                      isOpen
+                        ? "bg-white text-black rotate-0"
+                        : "rotate-180 text-white"
                     }`}
                   >
                     <HiOutlineArrowSmUp size={30} />
                   </span>
                 </div>
 
-                {isOpen && (
-                  <div className="pb-5 pr-8">
-                    <p className="text-[#ABABAB] lg:max-w-xl lg:text-xl">
-                      {faq.description}
-                    </p>
+                {/* Smooth Dropdown Animation Wrapper */}
+                <div
+                  className={`grid transition-[grid-template-rows] duration-500 ease-in-out ${
+                    isOpen
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    {/* Padding applied here so it slides away with the content */}
+                    <div className="pb-5 pr-8">
+                      <p className="text-[#ABABAB] lg:max-w-xl lg:text-xl">
+                        {faq.description}
+                      </p>
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}
@@ -67,7 +79,7 @@ export default function WhyChoose({ data }: any) {
             src={data.image.url}
             width={700}
             height={700}
-            alt="card image" // Or use data.title as alt
+            alt="card image"
             className="w-full h-full object-cover object-center mx-auto rounded-2xl"
           />
         )}

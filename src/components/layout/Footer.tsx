@@ -85,7 +85,7 @@ export default function Footer({ data }: Props) {
             </div>
           )}
 
-          <p className="text-[#ABABAB] text-sm leading-relaxed w-full">
+          <p className="text-[#ABABAB] text-lg lg:max-w-[260px] leading-relaxed w-full">
             {data?.description}
           </p>
 
@@ -100,10 +100,10 @@ export default function Footer({ data }: Props) {
             </button>
           </div>
 
-          <div className="flex items-center gap-4 mt-2">
+          <div className="flex items-center gap-4 w-full px-2">
             {data?.socials?.map((item: any, index: number) => (
               <div
-                className="bg-white p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer"
+                className="bg-white p-1 w-full flex items-center justify-center rounded-full hover:bg-gray-200 transition-colors cursor-pointer"
                 key={item.id || index}
               >
                 {/* SAFEGUARD: Only render Social Icon if URL exists */}

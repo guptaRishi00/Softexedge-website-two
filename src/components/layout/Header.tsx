@@ -62,7 +62,7 @@ export default function Header({ data, setDropdown }: any) {
 
         <LinkComp
           href={`/${data.cta.href}`}
-          className="text-black bg-white py-3 px-5 rounded-full text-sm font-medium"
+          className="text-black bg-white lg:pb-3 lg:pt-4 lg:px-7 rounded-full text-sm font-regular"
         >
           {data.cta.name}
         </LinkComp>

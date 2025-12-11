@@ -9,7 +9,7 @@ export default function Clients({ data }: any) {
 
   return (
     <section className="bg-black h-auto text-white rounded-3xl py-16 px-5 lg:px-30 my-20">
-      <div className="flex flex-col items-center justify-center gap-6 mb-12">
+      <div className="flex flex-col items-center justify-center gap-6 ">
         {/* Tag */}
         {data?.tag && (
           <span className="bg-white/10 text-white py-2 px-6 rounded-full text-sm font-medium">
@@ -44,7 +44,7 @@ export default function Clients({ data }: any) {
                   alt={image.name || "Client Logo"}
                   width={200}
                   height={200}
-                  className="object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300 w-20"
+                  className="object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300 w-10"
                 />
               </div>
             </div>

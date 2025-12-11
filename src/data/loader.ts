@@ -122,6 +122,15 @@ const homepageQuery = () =>
               },
             },
           },
+          "homepage.recognition": {
+            populate: {
+              cards: {
+                populate: {
+                  image: { fields: ["url", "name"] },
+                },
+              },
+            },
+          },
         },
       },
     },

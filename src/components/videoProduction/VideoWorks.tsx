@@ -46,7 +46,7 @@ export default function VideoWorks({ data }: any) {
         {data?.cards?.map((card: any, index: number) => (
           <div
             key={card?.id || index} // Added a key
-            className="bg-[#121212] rounded-2xl w-full px-2 py-20 border border-[#FFFFFF1A] h-60 flex items-center justify-center"
+            className="bg-[#121212] rounded-2xl w-full px-5 py-20 border border-[#FFFFFF1A] h-60 flex items-center justify-center"
           >
             <p className="font-medium text-4xl lg:text-2xl flex flex-col text-center items-center lg:gap-2 text-white">
               {card?.title}

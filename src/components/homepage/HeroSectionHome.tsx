@@ -1,9 +1,8 @@
 "use client";
 
-import React, { use, useState } from "react";
+import { useState } from "react";
 import Header from "../layout/Header";
 import Image from "next/image";
-import Button from "../Button";
 
 import LinkComp from "../LinkComp";
 
@@ -31,14 +30,19 @@ export default function HeroSection({ data, headerData }: any) {
       className="w-full lg:h-[96vh] h-[600px] bg-cover bg-center top-0 left-0 rounded-3xl relative overflow-hidden"
       style={bacgroundImage}
     >
-      {dropdown && (
-        <div className="absolute z-5 w-full backdrop-blur-lg h-screen"></div>
-      )}
+      <div
+        className={`fixed inset-0 z-40 w-full h-screen backdrop-blur-lg transition-all duration-300 ease-in-out ${
+          dropdown
+            ? "opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none"
+        }`}
+      ></div>
 
-      <div className="absolute top-0 left-0 w-full z-10 px-5 py-6 lg:py-6 lg:px-10">
+      <div className="absolute top-0 left-0 w-full z-50 px-5 py-6 lg:py-6 lg:px-10">
         <Header data={headerData} setDropdown={setDropdown} />
       </div>
 
+      {/* HERO CONTENT */}
       <div className="absolute inset-0 bg-gray-800/30 backdrop-blur-sm flex flex-col justify-between gap-8 px-5 py-6 lg:p-10">
         <div className=""></div>
         <div className="flex flex-col items-center gap-10 text-center lg:gap-5">
@@ -65,7 +69,7 @@ export default function HeroSection({ data, headerData }: any) {
             <LinkComp
               href={data?.letsTalk?.href}
               color={letsTalkTheme}
-              className="font-regular flex items-center lg:py-3 lg:px-5 px-5 py-2 gap-3 lg:text-lg"
+              className="font-regular bg-white flex items-center lg:pb-2 lg:pt-3 lg:px-4 px-5 py-2 gap-3 lg:text-lg"
             >
               {data?.letsTalk?.text}
               {data?.letsTalk?.image && (
@@ -74,14 +78,14 @@ export default function HeroSection({ data, headerData }: any) {
                   width={60}
                   height={60}
                   alt="button logo"
-                  className="lg:w-10 lg:h-7" // Moved class from alt text to className prop
+                  className="lg:w-23 lg:h-12"
                 />
               )}
             </LinkComp>
             <LinkComp
               href={data?.viewOurWork?.href}
               color={viewOurWorkTheme}
-              className="font-regular flex items-center lg:pt-3 lg:pb-2 lg:px-5 px-5 py-2 lg:py-8 gap-3 lg:text-lg"
+              className="font-regular bg-white flex items-center lg:pt-5 lg:pb-4 lg:px-5 px-5 py-2 lg:py-8 gap-3 lg:text-lg"
             >
               {data?.viewOurWork?.text}
             </LinkComp>
@@ -95,11 +99,11 @@ export default function HeroSection({ data, headerData }: any) {
           <LinkComp
             href={data?.bookCall?.href}
             color={bookCallTheme}
-            className="lg:flex items-center gap-2 pl-2 pr-3 py-2 hidden"
+            className="lg:flex items-center bg-white gap-2 lg:pl-2 lg:pr-4 lg:py-3 hidden"
           >
             {data?.bookCall?.image?.url && (
               <Image
-                src={data.bookCall.image.url} // Changed .logo to .image
+                src={data.bookCall.image.url}
                 width={30}
                 height={30}
                 alt="button logo"

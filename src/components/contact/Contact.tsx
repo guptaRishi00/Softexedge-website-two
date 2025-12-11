@@ -10,74 +10,68 @@ export default function Contact({}: Props) {
         <form className="w-full flex flex-col gap-10 lg:gap-20">
           <div className="flex flex-col lg:flex-row items-center w-full gap-6 lg:gap-20">
             <div className="flex flex-col gap-2 w-full">
-              <p className="text-white text-sm sm:text-base lg:pl-8 lg:pb-3">
+              <p className="text-white text-sm sm:text-lg lg:pl-0 lg:pb-3">
                 Full Name*
               </p>
               <input
                 type="text"
-                placeholder="Name"
                 className="bg-black px-4 sm:px-5 py-3 sm:py-5 rounded-full text-white text-sm sm:text-base w-full"
               />
             </div>
 
             <div className="flex flex-col gap-2 w-full">
-              <p className="text-white text-sm sm:text-base lg:pl-8 lg:pb-3">
+              <p className="text-white text-sm sm:text-lg lg:pl-0 lg:pb-3">
                 Last Name*
               </p>
               <input
                 type="text"
-                placeholder="Name"
                 className="bg-black px-4 sm:px-5 py-3 sm:py-5 rounded-full text-white text-sm sm:text-base w-full"
               />
             </div>
           </div>
 
           <div className="flex flex-col gap-2 w-full">
-            <p className="text-white text-sm sm:text-base lg:pl-8 lg:pb-3">
+            <p className="text-white text-sm sm:text-lg lg:pl-0 lg:pb-3">
               Work Email*
             </p>
             <input
               type="text"
-              placeholder="Email"
               className="bg-black px-4 sm:px-5 py-3 sm:py-5 rounded-full text-white text-sm sm:text-base"
             />
           </div>
 
           <div className="flex flex-col gap-2 w-full">
-            <p className="text-white text-sm sm:text-base lg:pl-8 lg:pb-3">
+            <p className="text-white text-sm sm:text-lg lg:pl-0 lg:pb-3">
               Phone Number*
             </p>
             <input
               type="text"
-              placeholder="Phone"
               className="bg-black px-4 sm:px-5 py-3 sm:py-5 rounded-full text-white text-sm sm:text-base"
             />
           </div>
 
           <div className="flex flex-col gap-2 w-full">
-            <p className="text-white text-sm sm:text-base lg:pl-8 lg:pb-3">
+            <p className="text-white text-sm sm:text-lg lg:pl-0 lg:pb-3">
               Add Service*
             </p>
             <input
               type="text"
-              placeholder="Service"
               className="bg-black px-4 sm:px-5 py-3 sm:py-5 rounded-full text-white text-sm sm:text-base"
             />
           </div>
 
           <div className="flex flex-col gap-2 w-full">
-            <p className="text-white text-sm sm:text-base lg:pl-8 lg:pb-3">
+            <p className="text-white text-sm sm:text-lg lg:pl-0 lg:pb-3">
               How did you hear about us?*
             </p>
             <input
               type="text"
-              placeholder="Source"
               className="bg-black px-4 sm:px-5 py-3 sm:py-5 rounded-full text-white text-sm sm:text-base"
             />
           </div>
 
           <div className="flex flex-col gap-2 w-full">
-            <p className="text-white text-sm sm:text-base lg:pl-8 lg:pb-3">
+            <p className="text-white text-sm sm:text-lg lg:pl-0 lg:pb-3">
               Message / Project Details
             </p>
             <textarea

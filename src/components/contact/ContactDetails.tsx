@@ -17,7 +17,7 @@ export default function ContactDetails({ data, contact }: any) {
 
       <div className="flex flex-col lg:flex-row items-stretch w-full h-full gap-8 lg:gap-10 mt-10">
         <div
-          className="relative w-full h-auto min-h-[500px] lg:h-screen bg-cover bg-center rounded-3xl flex flex-col"
+          className="relative w-full h-auto min-h-[500px] lg:h-auto bg-cover bg-center rounded-3xl flex flex-col"
           style={{ backgroundImage: `url(${contact.image?.url})` }}
         >
           {/* <div className="absolute inset-0 bg-black opacity-50 rounded-3xl"></div>{" "} */}

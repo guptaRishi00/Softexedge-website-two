@@ -49,7 +49,7 @@ export default function Positions({ data }: Props) {
               <LinkComp
                 color="blue"
                 href={"/"}
-                className="px-6 py-3 text-center block w-full lg:w-auto lg:inline-block"
+                className="px-6 py-3 text-center bg-white block w-full lg:w-auto lg:inline-block"
               >
                 {job.button.text}
               </LinkComp>

@@ -25,7 +25,7 @@ export default function WhyChoose({ data }: any) {
       )}
 
       {/* Right: Content */}
-      <div className="w-full lg:w-full flex flex-col justify-center h-full mt-2 lg:mt-0 ">
+      <div className="w-full lg:w-full flex flex-col justify-center h-full  lg:mt-0 ">
         {/* Tag */}
         {data?.tag && (
           <span className="bg-white/10 hidden lg:inline-block text-white text-xs sm:text-lg px-4 py-2 rounded-full mb-4 w-fit">
@@ -46,18 +46,17 @@ export default function WhyChoose({ data }: any) {
             {data?.lists?.map((list: any, index: any) => (
               <li
                 key={list.id || index}
-                className="flex items-start gap-5 text-gray-300"
+                className="flex items-center gap-5 text-gray-300"
               >
-                {list?.icon?.map?.((icon: any) => (
-                  <Image
-                    key={icon.id}
-                    src={icon?.url}
-                    alt={list.icon?.name || "icon"}
-                    width={25}
-                    height={25}
-                    className="mt-1"
-                  />
-                ))}
+                <Image
+                  key={list.icon.id}
+                  src={list.icon?.url}
+                  alt={list.icon?.name || "icon"}
+                  width={25}
+                  height={25}
+                  className="w-8 bg-[#171717] p-2 rounded-lg"
+                />
+
                 <span className="text-sm sm:text-lg leading-relaxed">
                   {list.text}
                 </span>
@@ -101,7 +100,7 @@ export default function WhyChoose({ data }: any) {
           <LinkComp
             color={buttonTheme}
             href={button.href || "/"}
-            className="flex items-center gap-3  text-black font-medium px-10 py-3 justify-center lg:w-fit"
+            className="flex items-center gap-3 bg-white text-black font-medium px-10 py-3 justify-center lg:w-fit"
           >
             {data?.button.text}
           </LinkComp>

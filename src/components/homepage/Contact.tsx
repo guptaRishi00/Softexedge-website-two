@@ -17,7 +17,7 @@ export default function Contact({ data }: any) {
       <div className="flex flex-col lg:flex-row items-stretch w-full h-full gap-8 lg:gap-10 mt-10">
         {/* image */}
         <div
-          className="relative w-full h-auto min-h-[500px] lg:h-screen bg-cover bg-center rounded-3xl flex flex-col"
+          className="relative w-full h-auto min-h-[500px] lg:h-auto bg-cover bg-center rounded-3xl flex flex-col"
           style={{ backgroundImage: `url(${data?.leftCard?.image?.url})` }}
         >
           {/* <div className="absolute inset-0 bg-black opacity-50 rounded-3xl"></div>{" "} */}
@@ -34,10 +34,7 @@ export default function Contact({ data }: any) {
           </div>
         </div>
 
-        {/* form */}
-        {/* Adjusted height to h-auto (mobile) and lg:h-screen (desktop) */}
-        {/* Adjusted padding for mobile */}
-        <div className="w-full h-auto lg:h-screen bg-[#121212] rounded-3xl py-8 px-6 lg:py-10 lg:px-12 space-y-8 lg:space-y-10">
+        <div className="w-full h-auto lg:h-auto bg-[#121212] rounded-3xl py-8 px-6 lg:py-10 lg:px-12 space-y-8 lg:space-y-10">
           {/* Adjusted font size for mobile */}
           <p className="text-white text-3xl lg:text-4xl font-medium">
             Help us get to know you.
@@ -45,53 +42,47 @@ export default function Contact({ data }: any) {
           <form action="" className="w-full flex flex-col gap-5">
             {/* This flex container is now col on mobile, row on desktop */}
             <div className="flex flex-col lg:flex-row items-center w-full gap-5 lg:gap-10">
-              <div className="flex flex-col gap-2 w-full">
+              <div className="flex flex-col gap-3 w-full">
                 <p className="text-white">Full Name*</p>
                 <input
                   type="text"
-                  placeholder="Name"
-                  className="bg-[#000000] px-4 py-3 rounded-full text-white"
+                  className="bg-[#000000] px-4 py-5 rounded-full text-white"
                 />
               </div>
-              <div className="flex flex-col gap-2 w-full">
+              <div className="flex flex-col gap-3 w-full">
                 <p className="text-white">Last Name*</p>
                 <input
                   type="text"
-                  placeholder="Name"
-                  className="bg-[#000000] px-4 py-3 rounded-full text-white"
+                  className="bg-[#000000] px-4 py-5 rounded-full text-white"
                 />
               </div>
             </div>
-            <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col gap-3 w-full">
               <p className="text-white">Work Email*</p>
               <input
                 type="text"
-                placeholder="Name"
-                className="bg-[#000000] px-4 py-3 rounded-full text-white"
+                className="bg-[#000000] px-4 py-5 rounded-full text-white"
               />
             </div>
-            <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col gap-3 w-full">
               <p className="text-white">Phone Number*</p>
               <input
                 type="text"
-                placeholder="Name"
-                className="bg-[#000000] px-4 py-3 rounded-full text-white"
+                className="bg-[#000000] px-4 py-5 rounded-full text-white"
               />
             </div>
-            <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col gap-3 w-full">
               <p className="text-white">Add Service*</p>
               <input
                 type="text"
-                placeholder="Name"
-                className="bg-[#000000] px-4 py-3 rounded-full text-white"
+                className="bg-[#000000] px-4 py-5 rounded-full text-white"
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
               <p className="text-white">How did you hear about Us?*</p>
               <input
                 type="text"
-                placeholder="Name"
-                className="bg-[#000000] px-4 py-3 rounded-full text-white"
+                className="bg-[#000000] px-4 py-5 rounded-full text-white"
               />
             </div>
             {/* Added text-white for the button text */}

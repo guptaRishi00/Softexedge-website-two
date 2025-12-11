@@ -9,13 +9,14 @@ export default function Brands({ data }: any) {
         logos={data?.image || []}
         speed={50}
         direction="left"
-        logoHeight={55}
-        gap={60}
+        logoHeight={60}
+        gap={20}
         pauseOnHover
         scaleOnHover
         fadeOut
         fadeOutColor="#ffffff"
         ariaLabel="Technology partners"
+        className=""
       />
     </div>
   );

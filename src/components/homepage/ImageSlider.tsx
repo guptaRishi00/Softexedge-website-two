@@ -22,60 +22,100 @@ export default function ImageSlider({
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia("(min-width: 768px)");
+    const media = window.matchMedia("(min-width: 1024px)");
     const listener = () => setIsDesktop(media.matches);
     listener();
     media.addEventListener("change", listener);
     return () => media.removeEventListener("change", listener);
   }, []);
 
-  if (!images || images.length === 0) {
-    return <div>No images to display.</div>;
-  }
+  if (!images || images.length === 0) return null;
 
-  const transformValue = isDesktop
-    ? `translateY(${-101 * currentIndex}%)`
-    : `translateX(${-102 * currentIndex}%)`;
+  /**
+   * This function determines exactly where each image should sit
+   * relative to the current active index.
+   */
+  const getSlideStyle = (index: number) => {
+    const len = images.length;
+
+    // 1. Calculate basic distance (e.g., if current is 2 and this is 3, dist is 1)
+    let distance = index - currentIndex;
+
+    // 2. Handle the "Wrap Around" logic for infinite scrolling
+    // If we are at the last slide, the first slide (index 0) should appear as "Next" (+1)
+    if (index === 0 && currentIndex === len - 1) {
+      distance = 1;
+    }
+    // If we are at the first slide, the last slide should appear as "Previous" (-1)
+    else if (index === len - 1 && currentIndex === 0) {
+      distance = -1;
+    }
+
+    // 3. Determine visibility
+    // We only care about the Current (0), Next (+1), and Previous (-1) slides.
+    // Everything else gets hidden far away to prevent glitches.
+    const isActive = distance === 0;
+    const isNear = Math.abs(distance) === 1;
+
+    // 4. Calculate Transform
+    // Desktop moves Y axis, Mobile moves X axis
+    const translateValue = distance * 100; // 100% distance
+    const transform = isDesktop
+      ? `translateY(${translateValue}%)`
+      : `translateX(${translateValue}%)`;
+
+    return {
+      transform,
+      opacity: isActive ? 1 : 0.4, // Fade out non-active images
+      zIndex: isActive ? 10 : 0, // Keep active on top
+      visibility: isActive || isNear ? "visible" : "hidden", // Hide others
+      transition: "all 0.7s cubic-bezier(0.25, 1, 0.5, 1)", // Smooth ease
+    } as React.CSSProperties;
+  };
 
   return (
-    <div className="flex flex-col w-full h-screen gap-5">
-      <div className="flex-1 relative overflow-hidden p-5">
-        <div
-          className={`flex h-full w-full transition-transform duration-500 ease-in-out gap-2 ${
-            isDesktop ? "flex-col" : "flex-row"
-          }`}
-          style={{ transform: transformValue }}
-        >
-          {images.map((image: ImageProp, index: number) => (
-            <div
-              className="h-full w-full shrink-0 grow-0 flex flex-col md:flex-row items-center justify-center"
-              key={index}
-            >
-              <div className="w-full h-3/4 md:w-[660px] md:h-[660px] p-5 lg:p-8 relative ">
-                <Image
-                  src={image.url}
-                  alt={image.alt || "Image Slider"}
-                  fill
-                  className="object-cover object-center rounded-3xl "
-                  priority={index === 0}
-                />
-              </div>
+    <div className="w-full h-full flex flex-col justify-center relative">
+      {/* Container Frame 
+        - h-[350px] to h-[500px]: Keeps the visual "window" smaller than the screen
+        - overflow-hidden: Hides the slides waiting above/below
+      */}
+      <div className="relative w-full h-[350px] lg:h-[100vh] rounded-[2.5rem] overflow-hidden bg-transparent">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className="absolute inset-0 w-full h-full flex items-center justify-center p-2"
+            style={getSlideStyle(index)}
+          >
+            <div className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl">
+              <Image
+                src={image.url}
+                alt={image.alt || "Slider Image"}
+                fill
+                className="object-cover"
+                priority={index === currentIndex}
+              />
+
+              {/* Optional: Dark overlay on inactive slides for extra focus */}
+              {index !== currentIndex && (
+                <div className="absolute inset-0 bg-black/40 transition-colors duration-700" />
+              )}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
-      <div className="flex md:hidden justify-center items-center gap-3">
-        {images.map((_, index: number) => (
+      {/* Mobile Dots */}
+      <div className="flex lg:hidden justify-center items-center gap-3 mt-6">
+        {images.map((_, index) => (
           <button
             key={index}
             onClick={() => onIndexChange(index)}
-            className={`h-1 w-1 rounded-full border border-white transition-colors ${
+            className={`h-2 w-2 rounded-full border border-white transition-all duration-300 ${
               index === currentIndex
-                ? "bg-white"
+                ? "bg-white w-6"
                 : "bg-transparent hover:bg-white/50"
             }`}
-            aria-label={`View Image ${index + 1}`}
+            aria-label={`View slide ${index + 1}`}
           />
         ))}
       </div>

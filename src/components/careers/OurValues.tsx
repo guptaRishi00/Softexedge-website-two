@@ -34,13 +34,14 @@ export default function OurValues({ data }: Props) {
             className="w-full h-full bg-[#121212] border border-[#FFFFFF26] flex flex-col items-center justify-center text-center rounded-2xl gap-4 p-8 md:p-10 lg:p-20 transition-colors hover:bg-[#1a1a1a]"
             key={card.id}
           >
-            <div className="relative w-16 h-16 lg:w-20 lg:h-20">
+            <div className="relative h-full w-fit bg-linear-to-r from-[#3445E7] via-[#2F85EA] to-[#07D6F3] p-5 rounded-2xl">
               <Image
                 src={card.image.url}
-                fill
+                width={200}
+                height={200}
                 sizes="(max-width: 768px) 64px, 80px"
                 alt="card image"
-                className="object-contain rounded-2xl"
+                className="object-contain rounded-2xl w-15"
               />
             </div>
 

@@ -5,11 +5,14 @@ import WhyChoose from "@/components/aboutpage/WhyChoose";
 import OurTeam from "@/components/aboutpage/OurTeam";
 import Review from "@/components/aboutpage/Review";
 import WhatWeDo from "@/components/homepage/WhatWeDo";
-import { getPageData } from "@/data/loader";
+import { getHomepageData, getPageData } from "@/data/loader";
+import Recognition from "@/components/homepage/Recognition";
 
 export default async function AboutPage() {
   try {
     const response = await getPageData("about");
+
+    const Homepageresponse = await getHomepageData();
 
     const page = response?.data?.[0];
     if (!page) {
@@ -46,6 +49,10 @@ export default async function AboutPage() {
       (block: any) => block.__component === "aboutpage.review"
     );
 
+    const recognition = Homepageresponse.data.blocks.find(
+      (block: any) => block.__component === "homepage.recognition"
+    );
+
     return (
       <main className="p-3 space-y-10">
         {heroSectionData && <HeroSection data={heroSectionData} />}
@@ -57,6 +64,7 @@ export default async function AboutPage() {
         {whyChooseData && <WhyChoose data={whyChooseData} />}
         {ourTeamData && <OurTeam data={ourTeamData} />}
         {reviewData && <Review data={reviewData} />}
+        {recognition && <Recognition data={recognition} />}
       </main>
     );
   } catch (error) {

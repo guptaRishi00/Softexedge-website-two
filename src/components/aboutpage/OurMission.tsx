@@ -33,13 +33,13 @@ export default function OurMission({ data }: any) {
       >
         {/* Card Image */}
         {imageUrl ? (
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center bg-linear-to-r from-[#3445E7] via-[#2F85EA] to-[#07D6F3] rounded-xl p-4 w-15 h-15">
             <Image
               src={imageUrl}
               alt={card.tag || "Mission Icon"}
               width={60}
               height={60}
-              className="object-contain"
+              className="object-contain w-8"
             />
           </div>
         ) : (
@@ -48,10 +48,10 @@ export default function OurMission({ data }: any) {
           </div>
         )}
 
-        {card?.tag && <h3 className="font-semibold lg:text-3xl">{card.tag}</h3>}
+        {card?.tag && <h3 className="font-medium lg:text-3xl">{card.tag}</h3>}
 
         {card?.description && (
-          <p className="text-[#ABABAB] text-lg leading-relaxed w-full mt-2">
+          <p className="text-[#ABABAB] text-md leading-relaxed w-full mt-0">
             {card.description}
           </p>
         )}
@@ -70,7 +70,7 @@ export default function OurMission({ data }: any) {
 
       {/* Title */}
       {data?.title && (
-        <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-semibold leading-snug max-w-2xl mb-14">
+        <h2 className="text-center text-2xl sm:text-3xl lg:text-5xl font-medium leading-snug max-w-4xl mb-14">
           {data.title}
         </h2>
       )}
