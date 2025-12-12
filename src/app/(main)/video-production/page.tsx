@@ -7,6 +7,7 @@ import { getPageData } from "@/data/loader";
 import HeroSection from "@/components/videoProduction/HeroSection";
 import WhyChoose from "@/components/videoProduction/WhyChoose";
 import VideoWorks from "@/components/videoProduction/VideoWorks";
+import CommonCta from "@/components/CommmonCta";
 
 export default async function VideoProduction() {
   try {
@@ -69,6 +70,7 @@ export default async function VideoProduction() {
         {ourProcessData && <OurProcess data={ourProcessData} />}
         {clientReviewData && <ClientReview data={clientReviewData} />}
         {contactUsData && <ContactUs data={contactUsData} />}
+        <CommonCta />
       </main>
     );
   } catch (error) {
