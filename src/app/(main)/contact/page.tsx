@@ -1,3 +1,4 @@
+import CommonCta from "@/components/CommmonCta";
 import Contact from "@/components/contact/Contact";
 import ContactDetails from "@/components/contact/ContactDetails";
 import HeroSectionContact from "@/components/contact/HeroSectionContact";
@@ -42,6 +43,7 @@ export default async function ContactUs({}: any) {
 
         <BrandComponet />
         <ClientReviewComponent />
+        <CommonCta />
       </main>
     );
   } catch (error) {

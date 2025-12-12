@@ -7,6 +7,7 @@ import Review from "@/components/aboutpage/Review";
 import WhatWeDo from "@/components/homepage/WhatWeDo";
 import { getHomepageData, getPageData } from "@/data/loader";
 import Recognition from "@/components/homepage/Recognition";
+import CommmonCta from "@/components/CommmonCta";
 
 export default async function AboutPage() {
   try {
@@ -65,6 +66,7 @@ export default async function AboutPage() {
         {ourTeamData && <OurTeam data={ourTeamData} />}
         {reviewData && <Review data={reviewData} />}
         {recognition && <Recognition data={recognition} />}
+        <CommmonCta />
       </main>
     );
   } catch (error) {

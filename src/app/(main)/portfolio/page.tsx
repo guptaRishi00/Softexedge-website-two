@@ -1,4 +1,5 @@
 import HeroSectionCareer from "@/components/careers/HeroSectionCareer";
+import CommonCta from "@/components/CommmonCta";
 import Clients from "@/components/portfolio/Clients";
 import PortfolioWork from "@/components/portfolio/PortfolioWork";
 import { getPageData } from "@/data/loader";
@@ -29,6 +30,7 @@ export default async function Portfolio() {
         {heroSectionData && <HeroSectionCareer data={heroSectionData} />}
         {portfolioWork && <PortfolioWork data={portfolioWork} />}
         {clients && <Clients data={clients} />}
+        <CommonCta />
       </main>
     );
   } catch (error) {

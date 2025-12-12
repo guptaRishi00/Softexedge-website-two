@@ -7,6 +7,7 @@ import { getPageData } from "@/data/loader";
 import HeroSection from "@/components/videoProduction/HeroSection";
 import WhyChoose from "@/components/videoProduction/WhyChoose"; // Ensures 'lists' support
 import VideoWorks from "@/components/videoProduction/VideoWorks";
+import CommonCta from "@/components/CommmonCta";
 
 export default async function WebDevelopment() {
   try {
@@ -62,6 +63,7 @@ export default async function WebDevelopment() {
         {ourProcessData && <OurProcess data={ourProcessData} />}
         {clientReviewData && <ClientReview data={clientReviewData} />}
         {contactUsData && <ContactUs data={contactUsData} />}
+        <CommonCta />
       </main>
     );
   } catch (error) {

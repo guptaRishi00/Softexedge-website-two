@@ -6,6 +6,7 @@ import ContactUs from "@/components/servicepage/ContactUs";
 import { getPageData } from "@/data/loader";
 import HeroSectionBrandStrategy from "@/components/brandStrategy/HeroSectionBrandStrategy";
 import WhyChoose from "@/components/brandStrategy/WhyChoose";
+import CommonCta from "@/components/CommmonCta";
 
 export default async function BrandStrategy() {
   try {
@@ -61,6 +62,7 @@ export default async function BrandStrategy() {
         {ourProcessData && <OurProcess data={ourProcessData} />}
         {clientReviewData && <ClientReview data={clientReviewData} />}
         {contactUsData && <ContactUs data={contactUsData} />}
+        <CommonCta />
       </main>
     );
   } catch (error) {

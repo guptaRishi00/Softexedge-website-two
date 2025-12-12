@@ -6,6 +6,7 @@ import OurProcess from "@/components/servicepage/OurProcess";
 import ClientReview from "@/components/servicepage/ClientReview";
 import ContactUs from "@/components/servicepage/ContactUs";
 import { getPageData } from "@/data/loader";
+import CommonCta from "@/components/CommmonCta";
 
 export default async function DigitalMarketingPage() {
   try {
@@ -66,6 +67,7 @@ export default async function DigitalMarketingPage() {
         {ourProcessData && <OurProcess data={ourProcessData} />}
         {clientReviewData && <ClientReview data={clientReviewData} />}
         {contactUsData && <ContactUs data={contactUsData} />}
+        <CommonCta />
       </main>
     );
   } catch (error) {
