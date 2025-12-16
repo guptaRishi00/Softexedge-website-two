@@ -1,3 +1,4 @@
+import CommonCta from "@/components/CommmonCta";
 import OurCase from "@/components/homepage/OurCase";
 import ClientReviewComponent from "@/components/shared-components/ClientReviewComponent";
 import HeroSectionSlug from "@/components/slug/HeroSectionSlug";
@@ -8,10 +9,11 @@ import SeoProcess from "@/components/slug/SeoProcess";
 import ServiceHighlight from "@/components/slug/ServiceHighlight";
 import ServiceHighlightAlternate from "@/components/slug/ServiceHighlightAlternate";
 import TechnicalSeo from "@/components/slug/TechnicalSeo";
-import { getHomepageData, getPageData } from "@/data/loader";
-import React from "react";
+import { getHomepageData, getPageData, getSlugPage } from "@/data/loader";
 
-type Props = {};
+type Props = {
+  params: Promise<{ slug: string }>;
+};
 
 const dummyData = {
   tag: "Our SEO Services",
@@ -111,25 +113,43 @@ const internationalSeoData = {
   ],
 };
 
-export default async function NewSlugaPage({}: Props) {
+export default async function NewSlugaPage({ params }: Props) {
   const response = await getHomepageData();
+
+  const { slug } = await params;
+
+  const pageResponse = await getSlugPage(slug);
 
   const ourCase = response.data.blocks.find(
     (block: any) => block.__component === "homepage.our-case"
   );
+  const herosection = pageResponse.data[0]?.blocks.find(
+    (block: any) => block.__component === "slug-page.hero-section"
+  );
+  const whyChoose = pageResponse.data[0]?.blocks.find(
+    (block: any) => block.__component === "slug-page.why-choose"
+  );
+  const metrics = pageResponse.data[0]?.blocks.find(
+    (block: any) => block.__component === "slug-page.metrics"
+  );
+  const process = pageResponse.data[0]?.blocks.find(
+    (block: any) => block.__component === "slug-page.seo-process"
+  );
 
   return (
     <div className="p-3 space-y-10">
-      <HeroSectionSlug />
-      <SeoApproach />
+      <HeroSectionSlug data={herosection} />
+      <SeoApproach data={whyChoose} />
       <ServiceHighlight data={dummyData} />
       <ServiceHighlightAlternate data={ServiceHighlightAlternateData} />
       <TechnicalSeo data={technicalSeoData} />
       <InternationalSeo data={internationalSeoData} />
-      <SeoMetrics />
+      <SeoMetrics data={metrics} />
       <OurCase data={ourCase} />
-      <SeoProcess />
+      <SeoProcess data={process} />
       <ClientReviewComponent />
+
+      <CommonCta />
     </div>
   );
 }

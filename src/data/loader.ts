@@ -1,5 +1,6 @@
 import { fetchAPI } from "@/utils/fetch-api";
 import { getStrapiURL } from "@/utils/get-strapi-url";
+import { p } from "framer-motion/client";
 import qs from "qs";
 
 const globalQuery = qs.stringify({
@@ -111,7 +112,15 @@ const homepageQuery = () =>
           "homepage.contact": {
             populate: {
               leftCard: {
-                populate: { image: { fields: ["url", "name"] } },
+                populate: {
+                  image: { fields: ["url", "name"] },
+                  testimonials: {
+                    populate: {
+                      icon: { fields: ["url", "name"] },
+                      profile: { fields: ["url", "name"] },
+                    },
+                  },
+                },
               },
             },
           },
@@ -729,6 +738,188 @@ export async function getPageData(slug: string) {
   const BASE_URL = getStrapiURL();
   const query = buildPageQuery(slug);
   const url = `${BASE_URL}/api/pages?${query}`;
+  const response = await fetchAPI(url, { method: "GET" });
+  return response;
+}
+
+function slugPageQuery(slug: string) {
+  let populateOptions = {};
+
+  if (slug === "seo-service") {
+    populateOptions = {
+      populate: {
+        blocks: {
+          on: {
+            "slug-page.hero-section": {
+              populate: {
+                image: {
+                  fields: ["url", "name"],
+                },
+                letsTalk: {
+                  populate: {
+                    image: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+                viewOurWork: true,
+                cardOne: true,
+                cardTwo: {
+                  populate: {
+                    image: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+            "slug-page.why-choose": {
+              populate: {
+                image: {
+                  fields: ["url", "name"],
+                },
+                cards: {
+                  populate: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+            "slug-page.our-seo": {
+              populate: {
+                image: {
+                  fields: ["url", "name"],
+                },
+                lists: {
+                  populate: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+            "slug-page.metrics": {
+              populate: {
+                cards: {
+                  populate: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  } else if (slug === "logo-design") {
+    populateOptions = {
+      populate: {
+        blocks: {
+          on: {
+            "slug-page.hero-section": {
+              populate: {
+                image: {
+                  fields: ["url", "name"],
+                },
+                letsTalk: {
+                  populate: {
+                    image: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+                viewOurWork: true,
+                cardOne: true,
+                cardTwo: {
+                  populate: {
+                    image: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+            "slug-page.why-choose": {
+              populate: {
+                image: {
+                  fields: ["url", "name"],
+                },
+                cards: {
+                  populate: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+            "slug-page.our-seo": {
+              populate: {
+                image: {
+                  fields: ["url", "name"],
+                },
+                lists: {
+                  populate: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+            "slug-page.metrics": {
+              populate: {
+                cards: {
+                  populate: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+            "slug-page.seo-process": {
+              populate: {
+                lists: {
+                  populate: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+                cards: {
+                  populate: {
+                    icon: {
+                      fields: ["url", "name"],
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  }
+
+  return qs.stringify(
+    {
+      filters: { slug: { $eq: slug } },
+      ...populateOptions,
+    },
+    { encodeValuesOnly: true }
+  );
+}
+
+export async function getSlugPage(slug: string) {
+  const BASE_URL = getStrapiURL();
+  const query = slugPageQuery(slug);
+  const url = `${BASE_URL}/api/slug-pages?${query}`;
   const response = await fetchAPI(url, { method: "GET" });
   return response;
 }

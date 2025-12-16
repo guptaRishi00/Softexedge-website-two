@@ -95,7 +95,7 @@ export default function OurServices({ data }: any) {
 
         <LinkComp
           color={card?.button?.theme || "blue"}
-          href={card?.button?.href || "/"}
+          href={`${"/brand-strategy/" + card?.button?.href}` || "/"}
           className="flex items-center gap-3 bg-white text-black font-medium px-10 py-3 justify-center w-fit"
         >
           {card?.button?.text}

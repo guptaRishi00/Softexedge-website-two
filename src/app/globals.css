@@ -10,3 +10,7 @@
   width: 300px;
   background-color: rgba(red, green, blue, alpha);
 }
+
+.unique-path {
+  /* clip-path: path("M 50,50 L 50,400 Z"); */
+}
