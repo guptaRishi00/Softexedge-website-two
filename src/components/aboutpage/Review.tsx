@@ -39,15 +39,18 @@ export default function Review({ data }: any) {
             key={card.id}
             className="bg-white rounded-2xl p-6 text-black h-auto flex flex-col justify-between items-start gap-5 shadow-lg hover:scale-[1.02] transition-transform duration-300"
           >
-            <p className="text-4xl mb-4">
-              <Image
-                src={card.icon.url}
-                alt={card.icon.name || "icon"}
-                width={40}
-                height={40}
-                className="object-contain"
-              />
-            </p>
+            <div className="text-4xl mb-4">
+              {/* Added optional chaining and conditional check */}
+              {card.icon?.url && (
+                <Image
+                  src={card.icon.url}
+                  alt={card.icon.name || "icon"}
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+              )}
+            </div>
             <p className="text-lg max-w-sm font-medium md:text-md text-black mb-6 leading-relaxed">
               {card.text}
             </p>
@@ -79,19 +82,22 @@ export default function Review({ data }: any) {
         >
           {cards.map((card: any) => (
             <div
-              className="w-full shrink-0 grow-0 flex items-center justify-center px-4" // Added padding for spacing
+              className="w-full shrink-0 grow-0 flex items-center justify-center px-4"
               key={card.id}
             >
               <div className="bg-white rounded-2xl p-6 text-black h-auto flex flex-col justify-between items-start gap-5 shadow-lg w-full">
-                <p className="text-4xl mb-4">
-                  <Image
-                    src={card.icon.url}
-                    alt={card.icon.name || "icon"}
-                    width={40}
-                    height={40}
-                    className="object-contain"
-                  />
-                </p>
+                <div className="text-4xl mb-4">
+                  {/* Added optional chaining and conditional check */}
+                  {card.icon?.url && (
+                    <Image
+                      src={card.icon.url}
+                      alt={card.icon.name || "icon"}
+                      width={40}
+                      height={40}
+                      className="object-contain"
+                    />
+                  )}
+                </div>
                 <p className="text-sm max-w-sm font-medium md:text-lg text-black mb-6 leading-relaxed">
                   {card.text}
                 </p>

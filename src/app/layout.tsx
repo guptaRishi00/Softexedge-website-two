@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { getGlobalData } from "@/data/loader";
+import { getGlobalData, getHomepageData } from "@/data/loader";
 import Footer from "@/components/layout/Footer";
+import FloatingBookCall from "@/components/layout/FloatingBookCall";
 
 export const metadata: Metadata = {
   title: "Softexedge",
@@ -91,12 +92,21 @@ export default async function RootLayout({
   const footerData = response.data.blocks.find(
     (block: any) => block.__component === "layout.footer"
   );
+
+  const HomePageResponse = await getHomepageData();
+
+  const heroSectionData = HomePageResponse.data.blocks.find(
+    (block: any) => block.__component === "homepage.hero-section" // Was "shared-components.hero-section"
+  );
   return (
     <html lang="en">
       <body
         className={`${itcAvg.variable} ${itcAvgCondensed.variable} antialiased`}
       >
         {children}
+
+        <FloatingBookCall data={heroSectionData} />
+
         <div className="p-3">
           <Footer data={footerData} />
         </div>

@@ -12,5 +12,10 @@
 }
 
 .unique-path {
-  /* clip-path: path("M 50,50 L 50,400 Z"); */
+  width: 1300px;
+  height: 600px;
+  background-color: #3b82f6;
+  clip-path: path(
+    "M 20,40 L 300,40 A 20,20 0 0 0 320,20 A 20,20 0 0 1 340,0 L 980,0 A 20,20 0 0 1 1000,20 L 1000,580 L 980,600 L 20,600 L 0,580 L 0,60 L 20,40 Z"
+  );
 }

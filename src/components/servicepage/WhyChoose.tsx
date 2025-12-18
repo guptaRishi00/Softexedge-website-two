@@ -86,7 +86,7 @@ export default function WhyChoose({ data }: any) {
                     className="object-contain mb-4"
                   />
                 )}
-                <h3 className="text-lg font-semibold mb-3">{card.tag}</h3>
+                <h3 className="text-lg font-medium mb-3">{card.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {card.description}
                 </p>

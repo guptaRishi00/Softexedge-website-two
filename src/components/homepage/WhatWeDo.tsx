@@ -42,23 +42,26 @@ export default function WhatWeDo({ data }: any) {
               {card.tag}
             </p>
             <div className="w-full lg:h-35 overflow-hidden">
-              <Image
-                src={card.image.url}
-                width={300}
-                height={300}
-                alt="card image"
-                className="mx-auto object-cover object-center"
-              />
+              {/* FIX: Added safety check for card.image.url */}
+              {card.image?.url && (
+                <Image
+                  src={card.image.url}
+                  width={300}
+                  height={300}
+                  alt="card image"
+                  className="mx-auto object-cover object-center"
+                />
+              )}
             </div>
             <p className="text-white max-w-[18rem] font-medium text-sm">
               {card?.description}
             </p>
 
             <LinkComp
-              href={card?.button.href || "/"}
+              href={card?.button?.href || "/"}
               className="px-5 pt-3 pb-2 text-xs border text-white bg-black border-[#2C2C2C]"
             >
-              {card?.button.text}
+              {card?.button?.text}
             </LinkComp>
           </div>
         ))}
@@ -71,24 +74,25 @@ export default function WhatWeDo({ data }: any) {
       >
         {data?.cards?.map((card: any) => (
           <div
-            // Added px-4 here to ensure spacing from screen edges
             className="h-full w-full shrink-0 grow-0 flex items-center justify-center px-4"
             key={card.id}
           >
-            {/* Removed mx-5 and used standard padding */}
             <div className="bg-[#121212] h-auto w-full flex flex-col px-6 py-8 items-start justify-between gap-6 rounded-3xl">
               <p className="border border-[#FFFFFF14] text-xs rounded-full py-2 px-5 text-white">
                 {card.tag}
               </p>
 
               <div className="w-full flex justify-center">
-                <Image
-                  src={card.image.url}
-                  width={300}
-                  height={300}
-                  alt="card image"
-                  className="w-40 h-40 object-contain"
-                />
+                {/* FIX: Added safety check for card.image.url */}
+                {card.image?.url && (
+                  <Image
+                    src={card.image.url}
+                    width={300}
+                    height={300}
+                    alt="card image"
+                    className="w-40 h-40 object-contain"
+                  />
+                )}
               </div>
 
               <p className="text-white w-full font-medium text-sm leading-relaxed">
@@ -96,11 +100,11 @@ export default function WhatWeDo({ data }: any) {
               </p>
 
               <LinkComp
-                href={card?.button.href || "/"}
-                color={card?.button.theme}
+                href={card?.button?.href || "/"}
+                color={card?.button?.theme}
                 className="px-6 py-3 text-xs border border-[#2C2C2C]"
               >
-                {card?.button.text}
+                {card?.button?.text}
               </LinkComp>
             </div>
           </div>

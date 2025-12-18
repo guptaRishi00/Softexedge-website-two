@@ -96,7 +96,7 @@ export default function HeroSection({ data, headerData }: any) {
           <p className="text-white text-center lg:text-start lg:text-base text-xs lg:max-w-md">
             {data?.description}
           </p>
-          <LinkComp
+          {/* <LinkComp
             href={data?.bookCall?.href}
             color={bookCallTheme}
             className="lg:flex items-center bg-white gap-2 lg:pl-2 lg:pr-4 lg:py-3 hidden"
@@ -111,7 +111,7 @@ export default function HeroSection({ data, headerData }: any) {
               />
             )}
             {data?.bookCall.text}
-          </LinkComp>
+          </LinkComp> */}
         </div>
       </div>
     </div>

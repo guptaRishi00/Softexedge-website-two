@@ -2,6 +2,7 @@ import { fetchAPI } from "@/utils/fetch-api";
 import { getStrapiURL } from "@/utils/get-strapi-url";
 import { p } from "framer-motion/client";
 import qs from "qs";
+import { text } from "stream/consumers";
 
 const globalQuery = qs.stringify({
   populate: {
@@ -101,6 +102,7 @@ const homepageQuery = () =>
                   result: { populate: { lists: true } },
                 },
               },
+              textArray: true,
             },
           },
           "homepage.why-choose": {
@@ -326,6 +328,7 @@ function buildPageQuery(slug: string) {
                     },
                   },
                 },
+                textArray: true,
               },
             },
             "digital-marketing.our-process": {

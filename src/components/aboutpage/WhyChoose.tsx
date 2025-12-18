@@ -48,14 +48,17 @@ export default function WhyChoose({ data }: any) {
                 key={list.id || index}
                 className="flex items-center gap-5 text-gray-300"
               >
-                <Image
-                  key={list.icon.id}
-                  src={list.icon?.url}
-                  alt={list.icon?.name || "icon"}
-                  width={25}
-                  height={25}
-                  className="w-8 bg-[#171717] p-2 rounded-lg"
-                />
+                {/* FIX: Added conditional check to ensure icon exists before rendering Image */}
+                {list.icon?.url && (
+                  <Image
+                    key={list.icon.id}
+                    src={list.icon.url}
+                    alt={list.icon.name || "icon"}
+                    width={25}
+                    height={25}
+                    className="w-8 bg-[#171717] p-2 rounded-lg"
+                  />
+                )}
 
                 <span className="text-sm sm:text-lg leading-relaxed">
                   {list.text}
