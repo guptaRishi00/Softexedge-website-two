@@ -1,8 +1,7 @@
 import { fetchAPI } from "@/utils/fetch-api";
 import { getStrapiURL } from "@/utils/get-strapi-url";
-import { p } from "framer-motion/client";
+
 import qs from "qs";
-import { text } from "stream/consumers";
 
 const globalQuery = qs.stringify({
   populate: {
@@ -15,6 +14,11 @@ const globalQuery = qs.stringify({
             links: true,
             cta: true,
             serviceDropdown: {
+              populate: {
+                icon: { fields: ["url", "name"] },
+              },
+            },
+            companyDropdown: {
               populate: {
                 icon: { fields: ["url", "name"] },
               },

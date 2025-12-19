@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { IoIosArrowDown } from "react-icons/io";
-// No longer import Dropdown here
-import NavLinkItem from "./NavLinkItem"; // Import the new component
+import NavLinkItem from "./NavLinkItem";
 import LinkComp from "../LinkComp";
 
 type link = {
@@ -15,6 +14,7 @@ type link = {
 };
 
 export default function Header({ data, setDropdown }: any) {
+  // Define icons for the first two links (Company and Services)
   const arrow = [{ icon: <IoIosArrowDown /> }, { icon: <IoIosArrowDown /> }];
 
   return (
@@ -48,16 +48,27 @@ export default function Header({ data, setDropdown }: any) {
         </Link>
 
         <div className="flex items-center gap-10">
-          {data.links.map((link: link, index: number) => (
-            <NavLinkItem
-              key={link.id}
-              link={link}
-              arrowIcon={arrow[index] && arrow[index].icon}
-              className="text-white"
-              setDropdown={setDropdown}
-              menus={data?.serviceDropdown}
-            />
-          ))}
+          {data.links.map((link: link, index: number) => {
+            // Logic to determine which dropdown content to provide
+            let currentMenus = null;
+            if (link.name === "Company") {
+              currentMenus = data?.companyDropdown;
+            } else if (link.name === "Services") {
+              currentMenus = data?.serviceDropdown;
+            }
+
+            return (
+              <NavLinkItem
+                key={link.id}
+                link={link}
+                // Arrow icon is applied based on the index
+                arrowIcon={arrow[index] && arrow[index].icon}
+                className="text-white"
+                setDropdown={setDropdown}
+                menus={currentMenus} // Pass the specific dropdown data
+              />
+            );
+          })}
         </div>
 
         <LinkComp
